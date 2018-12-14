@@ -26,7 +26,7 @@ namespace CourseApp.API.Data
             _context.Set<T>().Remove(entity);
         }
 
-        public IQueryable<T> FindAll()
+        public IQueryable<T> GetAll()
         {
             return _context.Set<T>();
         }
@@ -39,7 +39,7 @@ namespace CourseApp.API.Data
 
         public void Update(T entity)
         {
-            _context.Set<T>().Remove(entity);
+            _context.Set<T>().Update(entity);
         }
     }
 }

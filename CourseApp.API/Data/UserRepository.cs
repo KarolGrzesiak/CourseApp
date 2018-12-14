@@ -18,12 +18,12 @@ namespace CourseApp.API.Data
 
         public async Task<User> GetUserAsync(int userId)
         {
-            return await FindAll().Include(u => u.Photos).FirstOrDefaultAsync(u => u.Id == userId);
+            return await GetAll().Include(u => u.Photos).FirstOrDefaultAsync(u => u.Id == userId);
         }
 
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            return await FindAll().Include(u => u.Photos).ToListAsync();
+            return await GetAll().Include(u => u.Photos).ToListAsync();
         }
 
 
