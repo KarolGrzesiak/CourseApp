@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CourseApp.API.Data;
 using CourseApp.API.Helpers;
+using CourseApp.API.IRepositories;
 using CourseApp.API.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -74,6 +75,7 @@ namespace CourseApp.API
             Mapper.Reset();
             services.AddAutoMapper();
             services.AddTransient<Seed>();
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddMvc(options =>
                     {
                         var policy = new AuthorizationPolicyBuilder()
