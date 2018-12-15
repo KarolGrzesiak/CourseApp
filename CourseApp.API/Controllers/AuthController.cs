@@ -43,7 +43,10 @@ namespace CourseApp.API.Controllers
             var result = await _userManager.CreateAsync(usertoCreate,userForRegisterDto.Password);
             if(!result.Succeeded)
                 return BadRequest(result.Errors.ToList().First());
-
+            result = await _userManager.AddToRoleAsync(usertoCreate, Constants.StudentRole);
+            if (!result.Succeeded)
+                return BadRequest(result.Errors.ToList().First());
+                
             return Ok(usertoCreate);
 
         }
@@ -51,6 +54,7 @@ namespace CourseApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
+
             var user = await _userManager.Users.Include(u => u.Photos)
                                     .FirstOrDefaultAsync(u => u.NormalizedUserName == userForLoginDto.UserName.ToUpper());
 
@@ -60,10 +64,11 @@ namespace CourseApp.API.Controllers
             if (!result.Succeeded)
                 return Unauthorized();
 
+            var userToReturn = _mapper.Map<UserForListDto>(user);
 
             return Ok(new
             {
-                user = user,
+                user = userToReturn,
                 token = GenerateJwtToken(user).Result
             });
 

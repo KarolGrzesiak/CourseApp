@@ -1,26 +1,64 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/home']"> <h2>CAP</h2></a>
 
-  <div class="collapse navbar-collapse" id="navbarColor02">
-    <ul class="navbar-nav mr-auto">
-
-      <li class="nav-item">
-        <a class="nav-link" href="#">Tests</a>
+    <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/members']"> <h5>Users</h5></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Users</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/exams']"><h5>Tests</h5></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Messages</a>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/messages']"><h5>Messages</h5></a>
+      </li>
+      <li *appHasRole="['Admin', 'Moderator']" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/admin']">Admin</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+
+    <div *ngIf="loggedIn()" class="dropdown" dropdown>
+      <span class="mr-1"> <img src="{{photoUrl || '../../assets/user.png'}}" alt="" /> </span>
+      <a class="dropdown-toggle text-light" dropdownToggle>
+        Welcome {{ authService.decodedToken.unique_name | titlecase }}
+      </a>
+
+      <div class="dropdown-menu mt-3 ml-4" *dropdownMenu>
+        <a class="dropdown-item" [routerLink]="['/members']"
+          ><i class="fa fa-user"></i> Edit profile</a
+        >
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
+      </div>
+    </div>
+
+    <form
+      [formGroup]="loginForm"
+      *ngIf="!loggedIn()"
+      (ngSubmit)="login()"
+      class="form-inline my-2 my-lg-0"
+    >
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control mr-sm-2"
+          formControlName="userName"
+          placeholder="Username"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control mr-sm-2"
+          formControlName="password"
+          placeholder="Password"
+        />
+      </div>
+      <div class="form-group text-center">
+        <button class="btn btn-success my-2 my-sm-0" [disabled]="!loginForm.valid" type="submit">
+          Login
+        </button>
+      </div>
     </form>
   </div>
 </nav>

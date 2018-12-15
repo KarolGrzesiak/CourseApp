@@ -1,10 +1,19 @@
 .dropdown-toggle,
-.dropdown-item {
+a.dropdown-item {
   cursor: pointer;
+ color: #18BC9C;
 }
-
+a.dropdown-item:hover {
+  
+ color: #18BC9C;
+}
+.navbar {
+  height: 80px;
+}
 img {
-  max-height: 50px;
+  max-height: 60px;
   border: 2px solid white;
   display: inline;
 }
+
+

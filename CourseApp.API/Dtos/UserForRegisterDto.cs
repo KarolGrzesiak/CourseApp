@@ -5,6 +5,10 @@ namespace CourseApp.API.Dtos
 {
     public class UserForRegisterDto
     {
+
+
+        [Required]
+        public string Gender { get; set; }
         [Required]
         public string UserName { get; set; }
 
@@ -15,8 +19,6 @@ namespace CourseApp.API.Dtos
         [Required]
         public string Email { get; set; }
 
-        [Required]
-        public string Gender { get; set; }
         [Required]
         public string KnownAs { get; set; }
         [Required]
