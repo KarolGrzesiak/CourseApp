@@ -17,6 +17,7 @@ namespace CourseApp.API.Helpers
           {
               opt.ResolveUsing(src => src.DateOfBirth.CalculateAge());
           });
+            CreateMap<UserForUpdateDto, User>();
         }
 
     }

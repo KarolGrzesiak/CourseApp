@@ -40,14 +40,14 @@ namespace CourseApp.API.Controllers
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
             var usertoCreate = _mapper.Map<User>(userForRegisterDto);
-            var result = await _userManager.CreateAsync(usertoCreate,userForRegisterDto.Password);
-            if(!result.Succeeded)
+            var result = await _userManager.CreateAsync(usertoCreate, userForRegisterDto.Password);
+            if (!result.Succeeded)
                 return BadRequest(result.Errors.ToList().First());
             result = await _userManager.AddToRoleAsync(usertoCreate, Constants.StudentRole);
             if (!result.Succeeded)
                 return BadRequest(result.Errors.ToList().First());
-                
-            return Ok(usertoCreate);
+
+            return CreatedAtRoute("GetUserAsync", new { Controller = "Users", id = usertoCreate.Id },usertoCreate);
 
         }
 

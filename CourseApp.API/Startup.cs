@@ -76,6 +76,7 @@ namespace CourseApp.API
             services.AddAutoMapper();
             services.AddTransient<Seed>();
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+            services.AddScoped<LogUserActivity>();
             services.AddMvc(options =>
                     {
                         var policy = new AuthorizationPolicyBuilder()

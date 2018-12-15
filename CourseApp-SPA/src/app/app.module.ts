@@ -7,7 +7,6 @@ import { UserService } from './_services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MembersComponent } from './members/members.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ExamsComponent } from './exams/exams.component';
 import { HomeComponent } from './home/home.component';
@@ -16,12 +15,28 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AdminComponent } from './admin/admin.component';
 import { HasRoleDirective } from './_directives/hasRole.directive';
 import { RegisterComponent } from './home/register/register.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberCardComponent } from './members/member-card/member-card.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 
-import { BsDropdownModule, BsDatepickerModule } from 'ngx-bootstrap';
+import {
+  BsDropdownModule,
+  BsDatepickerModule,
+  PaginationModule,
+  TabsModule,
+  ButtonsModule
+} from 'ngx-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AlertifyService } from './_services/alertify.service';
 import { AuthGuard } from './_guards/auth.guard';
-
+import { NgxGalleryModule } from 'ngx-gallery';
+import { FileUploadModule } from 'ng2-file-upload';
+import { TimeAgoPipe } from 'time-ago-pipe';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { MemberListResolver } from './_resolvers/member-list.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -31,13 +46,19 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     NavComponent,
-    MembersComponent,
     MessagesComponent,
     HasRoleDirective,
     ExamsComponent,
     HomeComponent,
     AdminComponent,
-    RegisterComponent
+    RegisterComponent,
+    MemberListComponent,
+    MemberCardComponent,
+    MemberDetailComponent,
+    MemberEditComponent,
+    MemberMessagesComponent,
+    PhotoEditorComponent,
+    TimeAgoPipe
   ],
   imports: [
     JwtModule.forRoot({
@@ -51,12 +72,24 @@ export function tokenGetter() {
     HttpClientModule,
     FormsModule,
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
+    NgxGalleryModule,
+    FileUploadModule,
+    TabsModule.forRoot(),
+    ButtonsModule,
     BsDropdownModule.forRoot(),
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AlertifyService, AuthService, UserService, ErrorInterceptorProvider,
-  AuthGuard],
+  providers: [
+    AlertifyService,
+    AuthService,
+    UserService,
+    ErrorInterceptorProvider,
+    AuthGuard,
+    PreventUnsavedChanges,
+    MemberListResolver
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

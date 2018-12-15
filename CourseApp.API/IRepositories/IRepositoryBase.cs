@@ -8,7 +8,6 @@ namespace CourseApp.API.IRepositories
 {
     public interface IRepositoryBase<T>
     {
-        IQueryable<T> GetAll();
         void Add(T entity);
         void Delete(T entity);
         void Update(T entity);

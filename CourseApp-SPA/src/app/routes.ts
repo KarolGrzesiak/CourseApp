@@ -1,14 +1,17 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { MembersComponent } from './members/members.component';
 import { ExamsComponent } from './exams/exams.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { MemberListResolver } from './_resolvers/member-list.resolver';
 
 export const appRoutes: Routes = [
   {
     path: '',
+
     component: HomeComponent
   },
   {
@@ -18,7 +21,8 @@ export const appRoutes: Routes = [
     children: [
       {
         path: 'members',
-        component: MembersComponent
+        component: MemberListComponent,
+        resolve: { users: MemberListResolver }
       },
       {
         path: 'exams',

@@ -26,10 +26,6 @@ namespace CourseApp.API.Data
             _context.Set<T>().Remove(entity);
         }
 
-        public IQueryable<T> GetAll()
-        {
-            return _context.Set<T>();
-        }
 
 
         public async Task<bool> SaveAllAsync()
