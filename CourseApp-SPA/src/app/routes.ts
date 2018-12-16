@@ -11,6 +11,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
 
 export const appRoutes: Routes = [
   {
@@ -43,10 +44,9 @@ export const appRoutes: Routes = [
         path: 'exams',
         component: ExamsComponent
       },
-      {
-        path: 'messages',
-        component: MessagesComponent
-      },
+
+      { path: 'messages', component: MessagesComponent, resolve: { messages: MessagesResolver } },
+
       {
         path: 'admin',
         component: AdminComponent,

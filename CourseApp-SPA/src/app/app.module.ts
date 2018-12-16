@@ -39,6 +39,7 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -92,7 +93,8 @@ export function tokenGetter() {
     PreventUnsavedChanges,
     MemberListResolver,
     MemberEditResolver,
-    MemberDetailResolver
+    MemberDetailResolver,
+    MessagesResolver
   ],
   bootstrap: [AppComponent]
 })
