@@ -8,6 +8,7 @@ namespace CourseApp.API.Data
     {
         private IUserRepository _userRepository;
         private IPhotoRepository _photoRepository;
+        private IMessageRepository _messageRepository;
 
         private readonly DataContext _context;
 
@@ -36,6 +37,17 @@ namespace CourseApp.API.Data
                     _photoRepository = new PhotoRepository(_context);
                 }
                 return _photoRepository;
+            }
+        }
+        public IMessageRepository MessageRepository
+        {
+            get
+            {
+                if (_messageRepository == null)
+                {
+                    _messageRepository = new MessageRepository(_context);
+                }
+                return _messageRepository;
             }
         }
     }

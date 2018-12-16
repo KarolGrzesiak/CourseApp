@@ -4,5 +4,6 @@ namespace CourseApp.API.IRepositories
     {
         IUserRepository UserRepository { get; }
         IPhotoRepository PhotoRepository { get; }
+        IMessageRepository MessageRepository { get; }
     }
 }
