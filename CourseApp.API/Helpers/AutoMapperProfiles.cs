@@ -17,18 +17,26 @@ namespace CourseApp.API.Helpers
           {
               opt.ResolveUsing(src => src.DateOfBirth.CalculateAge());
           });
-            CreateMap<User, UserForDetailedDto>().ForMember(dest => dest.PhotoUrl, opt =>
+            CreateMap<User, UserForDetailedDto>()
+            .ForMember(dest => dest.PhotoUrl, opt =>
           {
               opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
           }).ForMember(dest => dest.Age, opt =>
           {
               opt.ResolveUsing(src => src.DateOfBirth.CalculateAge());
+          }).ForMember(dest => dest.Roles, opt =>
+          {
+              opt.MapFrom(src => src.UserRoles.Select(ur => ur.Role.Name).ToList());
           });
             CreateMap<UserForRegisterDto, User>();
             CreateMap<UserForUpdateDto, User>();
             CreateMap<Photo, PhotosForDetailedDto>();
             CreateMap<Photo, PhotoForReturnDto>();
             CreateMap<PhotoForCreationDto, Photo>();
+            CreateMap<MessageForCreationDto, Message>().ReverseMap();
+            CreateMap<Message, MessageToReturnDto>()
+                .ForMember(dest => dest.SenderPhotoUrl, opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
+                .ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
         }
 
     }

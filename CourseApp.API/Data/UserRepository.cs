@@ -15,14 +15,14 @@ namespace CourseApp.API.Data
         private readonly DataContext _context;
         public UserRepository(DataContext context) : base(context)
         {
-           
+
             _context = context;
 
         }
 
         public async Task<User> GetUserAsync(int userId)
         {
-            return await _context.Users.Include(u => u.Photos).FirstOrDefaultAsync(u => u.Id == userId);
+            return await _context.Users.Include(u => u.Photos).Include(u=>u.UserRoles).ThenInclude(ur=>ur.Role).FirstOrDefaultAsync(u => u.Id == userId);
         }
 
         public async Task<PagedList<User>> GetUsersAsync(UserParams userParams)

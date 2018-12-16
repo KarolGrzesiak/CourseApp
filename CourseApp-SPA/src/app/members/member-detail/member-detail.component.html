@@ -31,6 +31,10 @@
             <strong> Member since: </strong>
             <p>{{ user.created | date: 'mediumDate' }}</p>
           </div>
+            <div>
+              <strong> Roles: </strong>
+              <p>{{ user.roles }}</p>
+            </div>
         </div>
         <div class="card-footer">
           <div class="btn-group d-flex">
@@ -55,7 +59,7 @@
             <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
           </tab>
           <tab heading="Messages">
-            <p><!-- <app-member-messages [recipientId]="user.id"> </app-member-messages> --></p>
+            <p><app-member-messages [recipientId]="user.id"> </app-member-messages></p>
           </tab>
         </tabset>
       </div>
