@@ -13,6 +13,7 @@ namespace CourseApp.API
         public static int MaxAge { get; } = 99;
         public static int MaxPageSize { get; } = 50;
         public static int PageSize { get; } = 6;
+        public static string RequireAdminRole { get; } = "RequireAdminRole";
 
     }
 }

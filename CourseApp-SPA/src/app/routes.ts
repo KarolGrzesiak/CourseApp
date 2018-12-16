@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ExamsComponent } from './exams/exams.component';
 import { MessagesComponent } from './messages/messages.component';
-import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
@@ -12,6 +11,7 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 export const appRoutes: Routes = [
   {
@@ -49,7 +49,7 @@ export const appRoutes: Routes = [
 
       {
         path: 'admin',
-        component: AdminComponent,
+        component: AdminPanelComponent,
         data: { roles: ['Admin'] }
       }
     ]

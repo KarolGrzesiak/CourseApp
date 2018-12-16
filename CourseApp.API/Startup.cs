@@ -70,6 +70,10 @@ namespace CourseApp.API
                             ValidateLifetime = true
                         };
                     });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(Constants.RequireAdminRole, policy => policy.RequireRole(Constants.AdminRole));
+            });
 
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));

@@ -12,7 +12,6 @@ import { ExamsComponent } from './exams/exams.component';
 import { HomeComponent } from './home/home.component';
 import { appRoutes } from './routes';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
-import { AdminComponent } from './admin/admin.component';
 import { HasRoleDirective } from './_directives/hasRole.directive';
 import { RegisterComponent } from './home/register/register.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
@@ -21,13 +20,24 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { MemberListResolver } from './_resolvers/member-list.resolver';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
+import { AdminService } from './_services/admin.service';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+
 
 import {
   BsDropdownModule,
   BsDatepickerModule,
   PaginationModule,
   TabsModule,
-  ButtonsModule
+  ButtonsModule,
+  ModalModule
 } from 'ngx-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AlertifyService } from './_services/alertify.service';
@@ -35,11 +45,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from 'time-ago-pipe';
-import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
-import { MemberListResolver } from './_resolvers/member-list.resolver';
-import { MemberEditResolver } from './_resolvers/member-edit.resolver';
-import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
-import { MessagesResolver } from './_resolvers/messages.resolver';
+
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -53,7 +59,9 @@ export function tokenGetter() {
     HasRoleDirective,
     ExamsComponent,
     HomeComponent,
-    AdminComponent,
+    AdminPanelComponent,
+    RolesModalComponent,
+    UserManagementComponent,
     RegisterComponent,
     MemberListComponent,
     MemberCardComponent,
@@ -80,6 +88,7 @@ export function tokenGetter() {
     FileUploadModule,
     TabsModule.forRoot(),
     ButtonsModule,
+    ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
@@ -94,8 +103,10 @@ export function tokenGetter() {
     MemberListResolver,
     MemberEditResolver,
     MemberDetailResolver,
-    MessagesResolver
+    MessagesResolver,
+    AdminService
   ],
+  entryComponents: [RolesModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

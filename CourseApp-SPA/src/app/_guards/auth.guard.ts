@@ -14,7 +14,8 @@ export class AuthGuard implements CanActivate {
   ) {}
   canActivate(next: ActivatedRouteSnapshot): boolean {
     const roles = next.firstChild.data['roles'] as Array<string>;
-    if (roles) {
+    if (roles && this.authService.loggedIn()) {
+
       const match = this.authService.roleMatch(roles);
       if (match) {
         return true;
