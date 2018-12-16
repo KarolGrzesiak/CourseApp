@@ -7,12 +7,12 @@ namespace CourseApp.API.Data
     public class RepositoryWrapper : IRepositoryWrapper
     {
         private IUserRepository _userRepository;
-        private readonly DataContext _context;
-        private readonly UserManager<User> _userManager;
+        private IPhotoRepository _photoRepository;
 
-        public RepositoryWrapper(DataContext context, UserManager<User> userManager)
+        private readonly DataContext _context;
+
+        public RepositoryWrapper(DataContext context)
         {
-            _userManager = userManager;
             _context = context;
         }
 
@@ -22,9 +22,20 @@ namespace CourseApp.API.Data
             {
                 if (_userRepository == null)
                 {
-                    _userRepository = new UserRepository(_context,_userManager);
+                    _userRepository = new UserRepository(_context);
                 }
                 return _userRepository;
+            }
+        }
+        public IPhotoRepository PhotoRepository
+        {
+            get
+            {
+                if (_photoRepository == null)
+                {
+                    _photoRepository = new PhotoRepository(_context);
+                }
+                return _photoRepository;
             }
         }
     }

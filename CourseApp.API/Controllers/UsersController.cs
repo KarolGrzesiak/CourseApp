@@ -45,7 +45,8 @@ namespace CourseApp.API.Controllers
         {
 
             var user = await _repo.UserRepository.GetUserAsync(id);
-            return Ok(user);
+            var userToReturn = _mapper.Map<UserForDetailedDto>(user);
+            return Ok(userToReturn);
         }
 
         [HttpPut("{id}")]

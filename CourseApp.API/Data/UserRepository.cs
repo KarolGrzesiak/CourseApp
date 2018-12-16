@@ -13,10 +13,9 @@ namespace CourseApp.API.Data
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
         private readonly DataContext _context;
-        private readonly UserManager<User> _userManager;
-        public UserRepository(DataContext context, UserManager<User> userManager) : base(context)
+        public UserRepository(DataContext context) : base(context)
         {
-            _userManager = userManager;
+           
             _context = context;
 
         }

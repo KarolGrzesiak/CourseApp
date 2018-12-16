@@ -72,6 +72,7 @@ namespace CourseApp.API
                     });
 
             services.AddCors();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             Mapper.Reset();
             services.AddAutoMapper();
             services.AddTransient<Seed>();
