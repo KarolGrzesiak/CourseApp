@@ -1,11 +1,10 @@
-table{
-    maring-top: 15px;
+table {
+  maring-top: 15px;
 }
-.img-circle{
-    max-height: 50px;
-
+.img-circle {
+  max-height: 50px;
 }
 
-td{
-    vertical-align: middle
+td {
+  vertical-align: middle;
 }
