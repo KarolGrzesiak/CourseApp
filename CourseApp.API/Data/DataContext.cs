@@ -9,7 +9,7 @@ namespace CourseApp.API.Data
     , IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
         public DbSet<Photo> Photos { get; set; }
-
+        public DbSet<Message> Messages { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
@@ -31,6 +31,17 @@ namespace CourseApp.API.Data
                      .WithMany(r => r.UserRoles)
                      .HasForeignKey(ur => ur.RoleId)
                      .IsRequired();
+
+
+            builder.Entity<Message>()
+                .HasOne(m => m.Sender)
+                .WithMany(u => u.MessagesSent)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Message>()
+                .HasOne(m => m.Recipient)
+                .WithMany(u => u.MessagesRecivied)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

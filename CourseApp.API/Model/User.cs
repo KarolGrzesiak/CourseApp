@@ -17,5 +17,7 @@ namespace CourseApp.API.Model
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<Message> MessagesSent { get; set; }
+        public ICollection<Message> MessagesRecivied { get; set; }
     }
 }
