@@ -60,7 +60,5 @@ namespace CourseApp.API.Data
 
     }
 
-    public class UserManager
-    {
-    }
+   
 }

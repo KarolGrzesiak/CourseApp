@@ -1,0 +1,14 @@
+c:\Users\Karol\source\repos\CourseApp\CourseApp.TESTS\bin\Debug\netcoreapp2.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+c:\Users\Karol\source\repos\CourseApp\CourseApp.TESTS\bin\Debug\netcoreapp2.1\xunit.runner.reporters.netcoreapp10.dll
+c:\Users\Karol\source\repos\CourseApp\CourseApp.TESTS\bin\Debug\netcoreapp2.1\xunit.runner.utility.netcoreapp10.dll
+c:\Users\Karol\source\repos\CourseApp\CourseApp.TESTS\bin\Debug\netcoreapp2.1\CourseApp.TESTS.deps.json
+c:\Users\Karol\source\repos\CourseApp\CourseApp.TESTS\bin\Debug\netcoreapp2.1\CourseApp.TESTS.runtimeconfig.json
+c:\Users\Karol\source\repos\CourseApp\CourseApp.TESTS\bin\Debug\netcoreapp2.1\CourseApp.TESTS.runtimeconfig.dev.json
+c:\Users\Karol\source\repos\CourseApp\CourseApp.TESTS\bin\Debug\netcoreapp2.1\CourseApp.TESTS.dll
+c:\Users\Karol\source\repos\CourseApp\CourseApp.TESTS\bin\Debug\netcoreapp2.1\CourseApp.TESTS.pdb
+c:\Users\Karol\source\repos\CourseApp\CourseApp.TESTS\obj\Debug\netcoreapp2.1\CourseApp.TESTS.csprojAssemblyReference.cache
+c:\Users\Karol\source\repos\CourseApp\CourseApp.TESTS\obj\Debug\netcoreapp2.1\CourseApp.TESTS.csproj.CoreCompileInputs.cache
+c:\Users\Karol\source\repos\CourseApp\CourseApp.TESTS\obj\Debug\netcoreapp2.1\CourseApp.TESTS.AssemblyInfoInputs.cache
+c:\Users\Karol\source\repos\CourseApp\CourseApp.TESTS\obj\Debug\netcoreapp2.1\CourseApp.TESTS.AssemblyInfo.cs
+c:\Users\Karol\source\repos\CourseApp\CourseApp.TESTS\obj\Debug\netcoreapp2.1\CourseApp.TESTS.dll
+c:\Users\Karol\source\repos\CourseApp\CourseApp.TESTS\obj\Debug\netcoreapp2.1\CourseApp.TESTS.pdb

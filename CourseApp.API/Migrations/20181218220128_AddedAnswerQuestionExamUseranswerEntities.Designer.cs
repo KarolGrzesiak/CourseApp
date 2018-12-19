@@ -3,14 +3,16 @@ using System;
 using CourseApp.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourseApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20181218220128_AddedAnswerQuestionExamUseranswerEntities")]
+    partial class AddedAnswerQuestionExamUseranswerEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,8 +44,6 @@ namespace CourseApp.API.Migrations
                     b.Property<DateTime>("DatePublished");
 
                     b.Property<string>("Description");
-
-                    b.Property<TimeSpan?>("Duration");
 
                     b.HasKey("Id");
 

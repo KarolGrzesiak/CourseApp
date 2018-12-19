@@ -10,6 +10,10 @@ namespace CourseApp.API.Data
     {
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Exam> Exams { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<UserAnswer> UserAnswers { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 

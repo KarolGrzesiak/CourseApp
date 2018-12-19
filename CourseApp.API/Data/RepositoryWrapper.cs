@@ -9,6 +9,10 @@ namespace CourseApp.API.Data
         private IUserRepository _userRepository;
         private IPhotoRepository _photoRepository;
         private IMessageRepository _messageRepository;
+        private IAnswerRepository _answerRepository;
+        private IUserAnswerRepository _userAnswerRepository;
+        private IQuestionRepository _questionRepository;
+        private IExamRepository _examRepository;
 
         private readonly DataContext _context;
 
@@ -28,6 +32,58 @@ namespace CourseApp.API.Data
                 return _userRepository;
             }
         }
+
+        public IAnswerRepository AnswerRepository
+        {
+            get
+            {
+                if (_answerRepository == null)
+                {
+                    _answerRepository = new AnswerRepository(_context);
+                }
+                return _answerRepository;
+            }
+        }
+        public IQuestionRepository QuestionRepository
+        {
+            get
+            {
+                if (_questionRepository == null)
+                {
+                    _questionRepository = new QuestionRepository(_context);
+                }
+                return _questionRepository;
+            }
+        }
+
+        public IUserAnswerRepository UserAnswerRepository
+        {
+            get
+            {
+                if (_userAnswerRepository == null)
+                {
+                    _userAnswerRepository = new UserAnswerRepository(_context);
+                }
+                return _userAnswerRepository;
+            }
+        }
+
+        public IExamRepository ExamRepository
+        {
+            get
+            {
+                if (_examRepository == null)
+                {
+                    _examRepository = new ExamRepository(_context);
+                }
+                return _examRepository;
+            }
+        }
+
+
+
+
+
         public IPhotoRepository PhotoRepository
         {
             get
@@ -50,5 +106,6 @@ namespace CourseApp.API.Data
                 return _messageRepository;
             }
         }
+
     }
 }
