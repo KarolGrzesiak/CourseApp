@@ -1,0 +1,13 @@
+c:\Users\Karol\source\repos\CourseApp\CourseApp.Tests\bin\Debug\netstandard2.0\xunit.runner.visualstudio.testadapter.dll
+c:\Users\Karol\source\repos\CourseApp\CourseApp.Tests\bin\Debug\netstandard2.0\xunit.runner.reporters.net452.dll
+c:\Users\Karol\source\repos\CourseApp\CourseApp.Tests\bin\Debug\netstandard2.0\xunit.runner.utility.net452.dll
+c:\Users\Karol\source\repos\CourseApp\CourseApp.Tests\bin\Debug\netstandard2.0\xunit.abstractions.dll
+c:\Users\Karol\source\repos\CourseApp\CourseApp.Tests\bin\Debug\netstandard2.0\CourseApp.Tests.deps.json
+c:\Users\Karol\source\repos\CourseApp\CourseApp.Tests\bin\Debug\netstandard2.0\CourseApp.Tests.dll
+c:\Users\Karol\source\repos\CourseApp\CourseApp.Tests\bin\Debug\netstandard2.0\CourseApp.Tests.pdb
+c:\Users\Karol\source\repos\CourseApp\CourseApp.Tests\obj\Debug\netstandard2.0\CourseApp.Tests.csprojAssemblyReference.cache
+c:\Users\Karol\source\repos\CourseApp\CourseApp.Tests\obj\Debug\netstandard2.0\CourseApp.Tests.csproj.CoreCompileInputs.cache
+c:\Users\Karol\source\repos\CourseApp\CourseApp.Tests\obj\Debug\netstandard2.0\CourseApp.Tests.AssemblyInfoInputs.cache
+c:\Users\Karol\source\repos\CourseApp\CourseApp.Tests\obj\Debug\netstandard2.0\CourseApp.Tests.AssemblyInfo.cs
+c:\Users\Karol\source\repos\CourseApp\CourseApp.Tests\obj\Debug\netstandard2.0\CourseApp.Tests.dll
+c:\Users\Karol\source\repos\CourseApp\CourseApp.Tests\obj\Debug\netstandard2.0\CourseApp.Tests.pdb

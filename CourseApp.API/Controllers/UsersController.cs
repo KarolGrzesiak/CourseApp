@@ -45,6 +45,8 @@ namespace CourseApp.API.Controllers
         {
 
             var user = await _repo.UserRepository.GetUserAsync(id);
+            if (user == null)
+                return NotFound();
             var userToReturn = _mapper.Map<UserForDetailedDto>(user);
             return Ok(userToReturn);
         }
