@@ -7,6 +7,9 @@ using CourseApp.API.Controllers;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using CourseApp.API.Dtos;
+using CourseApp.API.Helpers;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CourseApp.Tests.BusinessLogic
 {
@@ -48,5 +51,7 @@ namespace CourseApp.Tests.BusinessLogic
 
             Assert.IsType<NotFoundResult>(result);
         }
+
+
     }
 }
