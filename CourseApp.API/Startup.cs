@@ -73,7 +73,9 @@ namespace CourseApp.API
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(Constants.RequireAdminRole, policy => policy.RequireRole(Constants.AdminRole));
+                options.AddPolicy(Constants.RequireTeacherRole, policy => policy.RequireRole(Constants.TeacherRole));
             });
+
 
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));

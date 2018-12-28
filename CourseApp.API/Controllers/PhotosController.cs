@@ -83,7 +83,7 @@ namespace CourseApp.API.Controllers
 
 
 
-            if (await _repo.PhotoRepository.SaveAllAsync())
+            if (await _repo.SaveAllAsync())
             {
                 var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
                 return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
@@ -110,7 +110,7 @@ namespace CourseApp.API.Controllers
             var currentMainPhoto = await _repo.PhotoRepository.GetMainPhotoForUserAsync(userId);
             currentMainPhoto.IsMain = false;
             photoFromRepo.IsMain = true;
-            if (await _repo.PhotoRepository.SaveAllAsync())
+            if (await _repo.SaveAllAsync())
                 return NoContent();
 
             return BadRequest("Could not set photo to main");
@@ -145,7 +145,7 @@ namespace CourseApp.API.Controllers
                 _repo.PhotoRepository.Delete(photoFromRepo);
             }
 
-            if (await _repo.PhotoRepository.SaveAllAsync())
+            if (await _repo.SaveAllAsync())
                 return Ok();
 
             return BadRequest("Failed to delete the photo");

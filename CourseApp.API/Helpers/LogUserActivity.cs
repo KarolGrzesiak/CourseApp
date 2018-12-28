@@ -16,7 +16,7 @@ namespace CourseApp.API.Helpers
             var repo = resultContext.HttpContext.RequestServices.GetService<IRepositoryWrapper>();
             var user = await repo.UserRepository.GetUserAsync(userId);
             user.LastActive = DateTime.Now;
-            await repo.UserRepository.SaveAllAsync();
+            await repo.SaveAllAsync();
         }
     }
 }

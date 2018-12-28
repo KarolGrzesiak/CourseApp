@@ -1,7 +1,9 @@
+using System.Linq;
 using System.Threading.Tasks;
 using CourseApp.API.Helpers;
 using CourseApp.API.IRepositories;
 using CourseApp.API.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseApp.API.Data
 {
@@ -14,14 +16,17 @@ namespace CourseApp.API.Data
 
         }
 
-        public Task<Exam> GetExamAsync(int examId)
+        public async Task<Exam> GetExamAsync(int examId)
         {
-            throw new System.NotImplementedException();
+
+            return await _context.Exams.Include(e=>e.Questions).FirstOrDefaultAsync(e => e.Id == examId);
         }
 
-        public Task<PagedList<Exam>> GetExamsAsync()
+
+        public async Task<PagedList<Exam>> GetExamsAsync(int? pageNumber, int? pageSize)
         {
-            throw new System.NotImplementedException();
+            var exams = _context.Exams.Include(e => e.Questions).OrderByDescending(e => e.DatePublished).AsQueryable();
+            return await PagedList<Exam>.CreateAsync(exams, pageNumber ?? 1, pageSize ?? Constants.PageSize);
         }
     }
 }

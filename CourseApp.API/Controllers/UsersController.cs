@@ -60,7 +60,7 @@ namespace CourseApp.API.Controllers
             var userfromRepo = await _repo.UserRepository.GetUserAsync(id);
 
             _mapper.Map(userForUpdateDto, userfromRepo);
-            if (await _repo.UserRepository.SaveAllAsync())
+            if (await _repo.SaveAllAsync())
                 return NoContent();
 
             throw new Exception($"Updating user {id} failed on save");

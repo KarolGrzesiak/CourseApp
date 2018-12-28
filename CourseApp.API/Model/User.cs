@@ -19,5 +19,6 @@ namespace CourseApp.API.Model
         public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<Message> MessagesSent { get; set; }
         public ICollection<Message> MessagesRecivied { get; set; }
+        public ICollection<UserExam> Exams { get; set; }
     }
 }

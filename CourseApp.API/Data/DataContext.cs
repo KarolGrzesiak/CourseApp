@@ -37,6 +37,8 @@ namespace CourseApp.API.Data
                      .IsRequired();
 
 
+
+
             builder.Entity<Message>()
                 .HasOne(m => m.Sender)
                 .WithMany(u => u.MessagesSent)
@@ -45,6 +47,13 @@ namespace CourseApp.API.Data
                 .HasOne(m => m.Recipient)
                 .WithMany(u => u.MessagesRecivied)
                 .OnDelete(DeleteBehavior.Restrict);
+
+
+            builder.Entity<UserExam>()
+                    .HasKey(ue => new { ue.UserId, ue.ExamId });
+
+            builder.Entity<UserAnswer>()
+                    .HasKey(ua => new { ua.UserId, ua.AnswerId });
 
         }
     }

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using CourseApp.API.IRepositories;
 using CourseApp.API.Model;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +14,7 @@ namespace CourseApp.API.Data
         private IUserAnswerRepository _userAnswerRepository;
         private IQuestionRepository _questionRepository;
         private IExamRepository _examRepository;
+        private IUserExamRepository _userExamRepository;
 
         private readonly DataContext _context;
 
@@ -105,6 +107,23 @@ namespace CourseApp.API.Data
                 }
                 return _messageRepository;
             }
+        }
+        public IUserExamRepository UserExamRepository
+        {
+            get
+            {
+                if (_userExamRepository == null)
+                {
+                    _userExamRepository = new UserExamRepository(_context);
+                }
+
+                return _userExamRepository;
+            }
+        }
+
+        public async Task<bool> SaveAllAsync()
+        {
+            return await _context.SaveChangesAsync() > 0;
         }
 
     }

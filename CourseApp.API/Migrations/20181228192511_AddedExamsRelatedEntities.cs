@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CourseApp.API.Migrations
 {
-    public partial class AddedAnswerQuestionExamUseranswerEntities : Migration
+    public partial class AddedExamsRelatedEntities : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,12 +13,21 @@ namespace CourseApp.API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    AuthorId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     DatePublished = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    Duration = table.Column<TimeSpan>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Exams", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Exams_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -37,6 +46,30 @@ namespace CourseApp.API.Migrations
                         name: "FK_Questions_Exams_ExamId",
                         column: x => x.ExamId,
                         principalTable: "Exams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserExam",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(nullable: false),
+                    ExamId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserExam", x => new { x.UserId, x.ExamId });
+                    table.ForeignKey(
+                        name: "FK_UserExam_Exams_ExamId",
+                        column: x => x.ExamId,
+                        principalTable: "Exams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserExam_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -66,18 +99,17 @@ namespace CourseApp.API.Migrations
                 name: "UserAnswers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<int>(nullable: false),
-                    QuestionId = table.Column<int>(nullable: false)
+                    AnswerId = table.Column<int>(nullable: false),
+                    Content = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserAnswers", x => x.Id);
+                    table.PrimaryKey("PK_UserAnswers", x => new { x.UserId, x.AnswerId });
                     table.ForeignKey(
-                        name: "FK_UserAnswers_Questions_QuestionId",
-                        column: x => x.QuestionId,
-                        principalTable: "Questions",
+                        name: "FK_UserAnswers_Answers_AnswerId",
+                        column: x => x.AnswerId,
+                        principalTable: "Answers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -94,28 +126,36 @@ namespace CourseApp.API.Migrations
                 column: "QuestionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Exams_AuthorId",
+                table: "Exams",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Questions_ExamId",
                 table: "Questions",
                 column: "ExamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserAnswers_QuestionId",
+                name: "IX_UserAnswers_AnswerId",
                 table: "UserAnswers",
-                column: "QuestionId");
+                column: "AnswerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserAnswers_UserId",
-                table: "UserAnswers",
-                column: "UserId");
+                name: "IX_UserExam_ExamId",
+                table: "UserExam",
+                column: "ExamId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Answers");
+                name: "UserAnswers");
 
             migrationBuilder.DropTable(
-                name: "UserAnswers");
+                name: "UserExam");
+
+            migrationBuilder.DropTable(
+                name: "Answers");
 
             migrationBuilder.DropTable(
                 name: "Questions");

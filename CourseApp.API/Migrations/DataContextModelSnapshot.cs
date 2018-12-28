@@ -39,13 +39,19 @@ namespace CourseApp.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("AuthorId");
+
                     b.Property<DateTime>("DatePublished");
 
                     b.Property<string>("Description");
 
                     b.Property<TimeSpan?>("Duration");
 
+                    b.Property<string>("Name");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Exams");
                 });
@@ -213,20 +219,30 @@ namespace CourseApp.API.Migrations
 
             modelBuilder.Entity("CourseApp.API.Model.UserAnswer", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("QuestionId");
-
                     b.Property<int>("UserId");
 
-                    b.HasKey("Id");
+                    b.Property<int>("AnswerId");
 
-                    b.HasIndex("QuestionId");
+                    b.Property<string>("Content");
 
-                    b.HasIndex("UserId");
+                    b.HasKey("UserId", "AnswerId");
+
+                    b.HasIndex("AnswerId");
 
                     b.ToTable("UserAnswers");
+                });
+
+            modelBuilder.Entity("CourseApp.API.Model.UserExam", b =>
+                {
+                    b.Property<int>("UserId");
+
+                    b.Property<int>("ExamId");
+
+                    b.HasKey("UserId", "ExamId");
+
+                    b.HasIndex("ExamId");
+
+                    b.ToTable("UserExam");
                 });
 
             modelBuilder.Entity("CourseApp.API.Model.UserRole", b =>
@@ -318,6 +334,14 @@ namespace CourseApp.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("CourseApp.API.Model.Exam", b =>
+                {
+                    b.HasOne("CourseApp.API.Model.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("CourseApp.API.Model.Message", b =>
                 {
                     b.HasOne("CourseApp.API.Model.User", "Recipient")
@@ -349,13 +373,26 @@ namespace CourseApp.API.Migrations
 
             modelBuilder.Entity("CourseApp.API.Model.UserAnswer", b =>
                 {
-                    b.HasOne("CourseApp.API.Model.Question", "Question")
+                    b.HasOne("CourseApp.API.Model.Answer", "Answer")
                         .WithMany()
-                        .HasForeignKey("QuestionId")
+                        .HasForeignKey("AnswerId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CourseApp.API.Model.User", "User")
                         .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CourseApp.API.Model.UserExam", b =>
+                {
+                    b.HasOne("CourseApp.API.Model.Exam", "Exam")
+                        .WithMany()
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CourseApp.API.Model.User", "User")
+                        .WithMany("Exams")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

@@ -6,7 +6,7 @@ namespace CourseApp.API.IRepositories
 {
     public interface IExamRepository : IRepositoryBase<Exam>
     {
-        Task<PagedList<Exam>> GetExamsAsync();
+        Task<PagedList<Exam>> GetExamsAsync(int? pageNumber, int? pageSize);
         Task<Exam> GetExamAsync(int examId);
 
     }

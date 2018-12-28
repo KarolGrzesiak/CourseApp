@@ -11,6 +11,5 @@ namespace CourseApp.API.IRepositories
         void Add(T entity);
         void Delete(T entity);
         void Update(T entity);
-        Task<bool> SaveAllAsync();
     }
 }

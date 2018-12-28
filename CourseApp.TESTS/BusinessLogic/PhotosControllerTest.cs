@@ -79,7 +79,7 @@ namespace CourseApp.Tests.BusinessLogic
             repositoryMock.Setup(r => r.UserRepository.GetUserAsync(It.IsAny<int>())).ReturnsAsync(() => user);
             repositoryMock.Setup(r => r.PhotoRepository.GetPhotoAsync(It.IsAny<int>())).ReturnsAsync(() => photo);
             repositoryMock.Setup(r => r.PhotoRepository.GetMainPhotoForUserAsync(It.IsAny<int>())).ReturnsAsync(() => photo);
-            repositoryMock.Setup(r => r.PhotoRepository.SaveAllAsync()).ReturnsAsync(true);
+            repositoryMock.Setup(r => r.SaveAllAsync()).ReturnsAsync(true);
             var controllerMock = new PhotosController(repositoryMock.Object, mapperMock.Object, cloudinaryConfigMock);
 
 
@@ -135,7 +135,7 @@ namespace CourseApp.Tests.BusinessLogic
             repositoryMock.Setup(r => r.UserRepository.GetUserAsync(It.IsAny<int>())).ReturnsAsync(() => user);
             repositoryMock.Setup(r => r.PhotoRepository.GetPhotoAsync(It.IsAny<int>())).ReturnsAsync(() => photoToMain);
             repositoryMock.Setup(r => r.PhotoRepository.GetMainPhotoForUserAsync(It.IsAny<int>())).ReturnsAsync(() => photo);
-            repositoryMock.Setup(r => r.PhotoRepository.SaveAllAsync()).ReturnsAsync(true);
+            repositoryMock.Setup(r => r.SaveAllAsync()).ReturnsAsync(true);
             var controllerMock = new PhotosController(repositoryMock.Object, mapperMock.Object, cloudinaryConfigMock);
 
 

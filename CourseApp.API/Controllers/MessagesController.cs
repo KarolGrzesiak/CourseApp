@@ -84,7 +84,7 @@ namespace CourseApp.API.Controllers
 
             _repo.MessageRepository.Add(message);
 
-            if (await _repo.MessageRepository.SaveAllAsync())
+            if (await _repo.SaveAllAsync())
             {
                 var messageToReturn = _mapper.Map<MessageToReturnDto>(message);
 
@@ -109,7 +109,7 @@ namespace CourseApp.API.Controllers
             if (messageFromRepo.SenderDeleted && messageFromRepo.RecipientDeleted)
                 _repo.MessageRepository.Delete(messageFromRepo);
 
-            if (await _repo.MessageRepository.SaveAllAsync())
+            if (await _repo.SaveAllAsync())
                 return NoContent();
 
             throw new Exception("Error deleting the message");
@@ -127,7 +127,7 @@ namespace CourseApp.API.Controllers
             messageFromRepo.IsRead = true;
             messageFromRepo.DateRead = DateTime.Now;
 
-            if (await _repo.MessageRepository.SaveAllAsync())
+            if (await _repo.SaveAllAsync())
                 return NoContent();
             throw new Exception("Error marking message as read");
         }
