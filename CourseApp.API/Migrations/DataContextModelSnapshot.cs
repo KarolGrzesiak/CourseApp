@@ -242,7 +242,7 @@ namespace CourseApp.API.Migrations
 
                     b.HasIndex("ExamId");
 
-                    b.ToTable("UserExam");
+                    b.ToTable("UserExams");
                 });
 
             modelBuilder.Entity("CourseApp.API.Model.UserRole", b =>

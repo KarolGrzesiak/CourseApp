@@ -51,7 +51,7 @@ namespace CourseApp.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserExam",
+                name: "UserExams",
                 columns: table => new
                 {
                     UserId = table.Column<int>(nullable: false),
@@ -59,15 +59,15 @@ namespace CourseApp.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserExam", x => new { x.UserId, x.ExamId });
+                    table.PrimaryKey("PK_UserExams", x => new { x.UserId, x.ExamId });
                     table.ForeignKey(
-                        name: "FK_UserExam_Exams_ExamId",
+                        name: "FK_UserExams_Exams_ExamId",
                         column: x => x.ExamId,
                         principalTable: "Exams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserExam_AspNetUsers_UserId",
+                        name: "FK_UserExams_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -141,8 +141,8 @@ namespace CourseApp.API.Migrations
                 column: "AnswerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserExam_ExamId",
-                table: "UserExam",
+                name: "IX_UserExams_ExamId",
+                table: "UserExams",
                 column: "ExamId");
         }
 
@@ -152,7 +152,7 @@ namespace CourseApp.API.Migrations
                 name: "UserAnswers");
 
             migrationBuilder.DropTable(
-                name: "UserExam");
+                name: "UserExams");
 
             migrationBuilder.DropTable(
                 name: "Answers");

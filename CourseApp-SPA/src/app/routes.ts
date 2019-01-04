@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { ExamsComponent } from './exams/exams.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { MemberListComponent } from './members/member-list/member-list.component';
@@ -12,6 +11,9 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { ExamListResolver } from './_resolvers/exam-list.resolver';
+import { ExamsPanelComponent } from './exams/exams-panel/exams-panel.component';
+import { SnakeComponent } from './games/snake/snake.component';
 
 export const appRoutes: Routes = [
   {
@@ -42,10 +44,12 @@ export const appRoutes: Routes = [
       },
       {
         path: 'exams',
-        component: ExamsComponent
+        component: ExamsPanelComponent,
+        resolve: { exams: ExamListResolver }
       },
 
       { path: 'messages', component: MessagesComponent, resolve: { messages: MessagesResolver } },
+      { path: 'games/snake', component: SnakeComponent },
 
       {
         path: 'admin',

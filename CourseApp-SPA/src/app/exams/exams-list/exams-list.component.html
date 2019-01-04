@@ -1,0 +1,34 @@
+<div class="row">
+  <table class="table">
+    <tr>
+      <th style="width: 10%">Exam</th>
+      <th style="width: 30%">Author</th>
+      <th style="width: 40%">Description</th>
+      <th style="width: 20%"></th>
+      <th style="width: 10%">Date Published</th>
+
+    </tr>
+    <tr *ngFor="let exam of exams">
+      <td>{{ exam.name }}</td>
+      <td>{{ exam.authorKnownAs }}</td>
+      <td>{{ exam.description }}</td>
+      <td><button class="btn btn-info" (click)="enrollToExam(exam.id)">Enroll</button></td>
+      <td>{{ exam.datePublished | date: "mediumDate" }}</td>
+
+    </tr>
+  </table>
+</div>
+<div class="d-flex justify-content-center">
+  <pagination
+    [boundaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.pageSize"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)="pageChanged($event)"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
+</div>

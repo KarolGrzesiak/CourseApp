@@ -1,0 +1,12 @@
+<div class="container mt-5">
+  <div class="tab-panel">
+    <tabset class="member-tabset">
+      <tab heading="Available Tests">
+        <div class="container"><app-exams-list></app-exams-list></div>
+      </tab>
+      <tab heading="Enrolled Tests" (select)="onSelectEnrolledExams()">
+        <div class="container"><app-exams-enrolled></app-exams-enrolled></div>
+      </tab>
+    </tabset>
+  </div>
+</div>

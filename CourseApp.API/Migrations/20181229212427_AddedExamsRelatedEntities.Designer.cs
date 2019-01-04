@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourseApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181228192511_AddedExamsRelatedEntities")]
+    [Migration("20181229212427_AddedExamsRelatedEntities")]
     partial class AddedExamsRelatedEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -244,7 +244,7 @@ namespace CourseApp.API.Migrations
 
                     b.HasIndex("ExamId");
 
-                    b.ToTable("UserExam");
+                    b.ToTable("UserExams");
                 });
 
             modelBuilder.Entity("CourseApp.API.Model.UserRole", b =>

@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessagesComponent } from './messages/messages.component';
-import { ExamsComponent } from './exams/exams.component';
 import { HomeComponent } from './home/home.component';
 import { appRoutes } from './routes';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
@@ -29,6 +28,13 @@ import { AdminService } from './_services/admin.service';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { ExamsListComponent } from './exams/exams-list/exams-list.component';
+import { ExamService } from './_services/exam.service';
+import { ExamListResolver } from './_resolvers/exam-list.resolver';
+import { ExamsPanelComponent } from './exams/exams-panel/exams-panel.component';
+import { ExamsEnrolledComponent } from './exams/exams-enrolled/exams-enrolled.component';
+import { SnakeComponent } from './games/snake/snake.component';
+import { ScoreService } from './_services/score.service';
 
 
 import {
@@ -37,7 +43,7 @@ import {
   PaginationModule,
   TabsModule,
   ButtonsModule,
-  ModalModule
+  ModalModule,
 } from 'ngx-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AlertifyService } from './_services/alertify.service';
@@ -57,7 +63,7 @@ export function tokenGetter() {
     NavComponent,
     MessagesComponent,
     HasRoleDirective,
-    ExamsComponent,
+    ExamsListComponent,
     HomeComponent,
     AdminPanelComponent,
     RolesModalComponent,
@@ -69,7 +75,11 @@ export function tokenGetter() {
     MemberEditComponent,
     MemberMessagesComponent,
     PhotoEditorComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    ExamsPanelComponent,
+    ExamsListComponent,
+    ExamsEnrolledComponent,
+    SnakeComponent
   ],
   imports: [
     JwtModule.forRoot({
@@ -91,7 +101,8 @@ export function tokenGetter() {
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+
   ],
   providers: [
     AlertifyService,
@@ -104,7 +115,10 @@ export function tokenGetter() {
     MemberEditResolver,
     MemberDetailResolver,
     MessagesResolver,
-    AdminService
+    AdminService,
+    ExamService,
+    ExamListResolver,
+    ScoreService
   ],
   entryComponents: [RolesModalComponent],
   bootstrap: [AppComponent]

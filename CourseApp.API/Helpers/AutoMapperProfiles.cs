@@ -38,6 +38,8 @@ namespace CourseApp.API.Helpers
                 .ForMember(dest => dest.SenderPhotoUrl, opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
                 .ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
             CreateMap<ExamForCreationDto, Exam>();
+            CreateMap<Exam, ExamForListDto>()
+                .ForMember(dest => dest.AuthorKnownAs, opt => opt.MapFrom(src => src.Author.KnownAs));
             CreateMap<Question, QuestionForReturnDto>();
             CreateMap<QuestionForCreationDto, Question>();
             CreateMap<AnswerForCreationDto, Answer>();
