@@ -35,6 +35,7 @@ import { ExamsPanelComponent } from './exams/exams-panel/exams-panel.component';
 import { ExamsEnrolledComponent } from './exams/exams-enrolled/exams-enrolled.component';
 import { SnakeComponent } from './games/snake/snake.component';
 import { ScoreService } from './_services/score.service';
+import { ExamsCreateComponent } from './exams/exams-create/exams-create.component';
 
 
 import {
@@ -43,7 +44,7 @@ import {
   PaginationModule,
   TabsModule,
   ButtonsModule,
-  ModalModule,
+  ModalModule
 } from 'ngx-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AlertifyService } from './_services/alertify.service';
@@ -51,7 +52,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from 'time-ago-pipe';
-
+import { NgcFloatButtonModule } from 'ngc-float-button';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -79,7 +80,8 @@ export function tokenGetter() {
     ExamsPanelComponent,
     ExamsListComponent,
     ExamsEnrolledComponent,
-    SnakeComponent
+    SnakeComponent,
+    ExamsCreateComponent
   ],
   imports: [
     JwtModule.forRoot({
@@ -102,7 +104,7 @@ export function tokenGetter() {
     BsDropdownModule.forRoot(),
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
-
+    NgcFloatButtonModule
   ],
   providers: [
     AlertifyService,

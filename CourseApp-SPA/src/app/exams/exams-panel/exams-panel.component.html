@@ -9,4 +9,9 @@
       </tab>
     </tabset>
   </div>
+
 </div>
+  <ngc-float-button icon="add" color="" *appHasRole="['Teacher']">
+    <ngc-float-item-button icon="delete" content="Delete Exam" color=""></ngc-float-item-button>
+    <ngc-float-item-button icon="create" content="Create Exam" color="" [routerLink]="['/exams/create']"></ngc-float-item-button>
+  </ngc-float-button>

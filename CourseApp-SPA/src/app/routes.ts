@@ -14,6 +14,7 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { ExamListResolver } from './_resolvers/exam-list.resolver';
 import { ExamsPanelComponent } from './exams/exams-panel/exams-panel.component';
 import { SnakeComponent } from './games/snake/snake.component';
+import { ExamsCreateComponent } from './exams/exams-create/exams-create.component';
 
 export const appRoutes: Routes = [
   {
@@ -46,6 +47,10 @@ export const appRoutes: Routes = [
         path: 'exams',
         component: ExamsPanelComponent,
         resolve: { exams: ExamListResolver }
+      },
+      {
+        path: 'exams/create',
+        component: ExamsCreateComponent
       },
 
       { path: 'messages', component: MessagesComponent, resolve: { messages: MessagesResolver } },
