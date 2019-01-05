@@ -9,4 +9,5 @@ export interface Exam {
   datePublished: Date;
   duration?: string;
   questions?: Question[];
+  delete: boolean;
 }

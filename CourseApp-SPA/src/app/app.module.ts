@@ -36,7 +36,7 @@ import { ExamsEnrolledComponent } from './exams/exams-enrolled/exams-enrolled.co
 import { SnakeComponent } from './games/snake/snake.component';
 import { ScoreService } from './_services/score.service';
 import { ExamsCreateComponent } from './exams/exams-create/exams-create.component';
-
+import { ExamsDeleteModalComponent } from './exams/exams-delete-modal/exams-delete-modal.component';
 
 import {
   BsDropdownModule,
@@ -81,7 +81,8 @@ export function tokenGetter() {
     ExamsListComponent,
     ExamsEnrolledComponent,
     SnakeComponent,
-    ExamsCreateComponent
+    ExamsCreateComponent,
+    ExamsDeleteModalComponent
   ],
   imports: [
     JwtModule.forRoot({
@@ -122,7 +123,7 @@ export function tokenGetter() {
     ExamListResolver,
     ScoreService
   ],
-  entryComponents: [RolesModalComponent],
+  entryComponents: [RolesModalComponent, ExamsDeleteModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

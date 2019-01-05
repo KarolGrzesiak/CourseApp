@@ -37,4 +37,7 @@ export class ExamService {
   getEnrolledExams(userId: number) {
     return this.http.get<Exam[]>(this.baseUrl + 'exams/' + 'enrolled/' + userId);
   }
+  deleteExam(examId: number) {
+    return this.http.delete(this.baseUrl + 'exams/' + examId);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { ExamService } from 'src/app/_services/exam.service';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 import { Exam } from 'src/app/_models/exam';
@@ -15,6 +15,7 @@ import { ExamsEnrolledComponent } from '../exams-enrolled/exams-enrolled.compone
 export class ExamsListComponent implements OnInit {
   pagination: Pagination;
   exams: Exam[];
+  @Output() enrolled = new EventEmitter();
   constructor(
     private examService: ExamService,
     private alertify: AlertifyService,
@@ -47,9 +48,10 @@ export class ExamsListComponent implements OnInit {
   }
   enrollToExam(examId: number) {
     const userId = this.authService.currentUser.id;
+    const currentExams = this.exams;
     this.examService.addUserToExam(userId, examId).subscribe(
       () => {
-        this.loadExams();
+        this.exams.splice(this.exams.findIndex(e => e.id === examId), 1);
         this.alertify.success('Successfully enrolled on test');
       },
       error => {

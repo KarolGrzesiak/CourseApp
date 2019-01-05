@@ -1,18 +1,16 @@
-mat-icon.material-icons.mat-icon-no-color {
-  color: white;
-}
 ngc-float-button {
   position: absolute;
-  bottom: 10%;
-  right: 5%;
+  right: 1%;
+  bottom:5%;
 }
+
 ngc-float-button /deep/ .fab-toggle {
   color: white;
   background-color: #18bc9c;
 }
 
 ngc-float-button /deep/ .fab-toggle:hover {
-    color: #2c3e50;
+  color: #2c3e50;
 }
 
 ngc-float-item-button /deep/ .content {

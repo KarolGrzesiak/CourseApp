@@ -276,6 +276,6 @@ export class SnakeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.alertify.confirm('Controls: W,S,A,D', () => null);
+    this.alertify.success('Controls: W,S,A,D');
   }
 }
