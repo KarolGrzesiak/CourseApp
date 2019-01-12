@@ -18,7 +18,7 @@ namespace CourseApp.API.Data
         }
         public void Add(T entity)
         {
-            _context.Set<T>().Add(entity);
+            _context.Set<T>().AddAsync(entity);
         }
 
         public void Delete(T entity)

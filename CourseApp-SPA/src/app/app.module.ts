@@ -37,6 +37,7 @@ import { SnakeComponent } from './games/snake/snake.component';
 import { ScoreService } from './_services/score.service';
 import { ExamsCreateComponent } from './exams/exams-create/exams-create.component';
 import { ExamsDeleteModalComponent } from './exams/exams-delete-modal/exams-delete-modal.component';
+import { RockPaperScissorsComponent } from './games/rock-paper-scissors/rock-paper-scissors.component';
 
 import {
   BsDropdownModule,
@@ -53,6 +54,14 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { NgcFloatButtonModule } from 'ngc-float-button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatCardModule,
+  MatToolbarModule
+} from '@angular/material';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -82,7 +91,8 @@ export function tokenGetter() {
     ExamsEnrolledComponent,
     SnakeComponent,
     ExamsCreateComponent,
-    ExamsDeleteModalComponent
+    ExamsDeleteModalComponent,
+    RockPaperScissorsComponent
   ],
   imports: [
     JwtModule.forRoot({
@@ -105,7 +115,16 @@ export function tokenGetter() {
     BsDropdownModule.forRoot(),
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
-    NgcFloatButtonModule
+    NgcFloatButtonModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    NgCircleProgressModule.forRoot({
+      titleColor: '#ffffff',
+      unitsColor: '#ffffff'
+    })
   ],
   providers: [
     AlertifyService,

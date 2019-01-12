@@ -6,6 +6,6 @@ namespace CourseApp.API.IRepositories
 {
     public interface IUserExamRepository : IRepositoryBase<UserExam>
     {
-        Task<IEnumerable<Exam>> GetExamsForUserAsync(int userId);
+        Task<IEnumerable<Exam>> GetEnrolledExamsForUserAsync(int userId);
     }
 }

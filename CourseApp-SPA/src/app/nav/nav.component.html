@@ -12,18 +12,25 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/messages']"><h5>Messages</h5></a>
       </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/games/snake']">
-            <h5>Games</h5>
-          </a>
-        </li>
+      <li class="nav-item" routerLinkActive="active" class="dropdown" dropdown>
+        <a class="nav-link" dropdownToggle> <h5>Games</h5> </a>
+        <div class="dropdown-menu" *dropdownMenu>
+          <a class="dropdown-item" [routerLink]="['/games/snake']"
+            ><i class="fa fa-ellipsis-h"></i> Snake</a
+          >
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item"[routerLink]="['/games/rockpaperscissors']"
+            ><i class="fa fa-hand-scissors-o"></i> Rock,Paper,Scissors</a
+          >
+        </div>
+      </li>
       <li *appHasRole="['Admin']" class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/admin']"><h5>Admin</h5></a>
       </li>
     </ul>
 
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
-      <span class="mr-1"> <img src="{{photoUrl || '../../assets/user.png'}}" alt="" /> </span>
+      <span class="mr-1"> <img src="{{ photoUrl || '../../assets/user.png' }}" alt="" /> </span>
       <a class="dropdown-toggle text-light" dropdownToggle>
         Welcome {{ authService.decodedToken.unique_name | titlecase }}
       </a>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CourseApp.API.Model
 {
@@ -13,6 +14,10 @@ namespace CourseApp.API.Model
         public string Description { get; set; }
         public ICollection<Question> Questions { get; set; }
         public TimeSpan? Duration { get; set; }
+        [Required]
+        public byte[] PasswordHash { get; set; }
+        [Required]
+        public byte[] PasswordSalt { get; set; }
 
 
     }

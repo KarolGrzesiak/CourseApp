@@ -49,12 +49,14 @@ export class ExamsPanelComponent implements OnInit {
                 1
               );
             });
-            this.alertify.success('Exams have been deleted');
           },
           error => {
             this.alertify.error(error);
-          }
+          },
+
         );
+        this.alertify.success('Exams have been deleted');
+
       },
       error => {
         this.alertify.error(error);

@@ -11,3 +11,6 @@ export interface Exam {
   questions?: Question[];
   delete: boolean;
 }
+export interface ExamForCreation extends Exam {
+  password: string;
+}

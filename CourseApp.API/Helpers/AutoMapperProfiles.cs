@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using AutoMapper;
 using CourseApp.API.Dtos;
@@ -37,7 +38,9 @@ namespace CourseApp.API.Helpers
             CreateMap<Message, MessageToReturnDto>()
                 .ForMember(dest => dest.SenderPhotoUrl, opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
                 .ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
-            CreateMap<ExamForCreationDto, Exam>();
+            CreateMap<ExamForCreationDto, Exam>()
+                .ForMember(dest => dest.Duration, opt => opt.MapFrom(src => TimeSpan.FromMinutes(src.Duration)));
+
             CreateMap<Exam, ExamForListDto>()
                 .ForMember(dest => dest.AuthorKnownAs, opt => opt.MapFrom(src => src.Author.KnownAs));
             CreateMap<Question, QuestionForReturnDto>();

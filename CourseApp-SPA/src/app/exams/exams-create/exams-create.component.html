@@ -1,3 +1,116 @@
-<p>
-  exams-create works!
-</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <form [formGroup]="examForm" (ngSubmit)="createExam()">
+        <h2 class="text-center text-primary">Create Exam</h2>
+        <hr />
+
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': examForm.get('name').errors && examForm.get('name').touched
+            }"
+            formControlName="name"
+            placeholder="Name"
+          />
+          <div class="invalid-feedback">Please choose a name for exam</div>
+        </div>
+
+        <div class="form-group">
+          <input class="form-control" placeholder="Description" formControlName="description" />
+        </div>
+        <div class="form-group">
+          <input
+            type="number"
+            min="1"
+            class="form-control"
+            placeholder="Duration (in minutes)"
+            formControlName="duration"
+            [ngClass]="{
+              'is-invalid': examForm.get('duration').errors
+            }"
+          />
+              <div class="invalid-feedback">
+                Only positive numbers are accepted
+              </div>
+        </div>
+
+
+        <div class="form-group">
+          <input
+            type="password"
+            [ngClass]="{
+              'is-invalid': examForm.get('password').errors && examForm.get('password').touched
+            }"
+            class="form-control"
+            formControlName="password"
+            placeholder="Password"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              examForm.get('password').hasError('required') && examForm.get('password').touched
+            "
+          >
+            Password is required
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              examForm.get('password').hasError('minlength') && examForm.get('password').touched
+            "
+          >
+            Password must be at least 4 characters
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              examForm.get('password').hasError('maxlength') && examForm.get('password').touched
+            "
+          >
+            Password cannot exceed 8 characters
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="password"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                (examForm.get('confirmPassword').errors &&
+                  examForm.get('confirmPassword').touched) ||
+                (examForm.get('confirmPassword').touched && examForm.hasError('mismatch'))
+            }"
+            formControlName="confirmPassword"
+            placeholder="Confirm Password"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              examForm.get('confirmPassword').hasError('required') &&
+              examForm.get('confirmPassword').touched
+            "
+          >
+            Please confirm a password
+          </div>
+          <div
+            class="invalid-feedback"
+            *ngIf="examForm.hasError('mismatch') && examForm.get('confirmPassword').touched"
+          >
+            Passwords must match
+          </div>
+        </div>
+
+        <div class="form-group text-center">
+          <button class="btn btn-success mr-2" [disabled]="!examForm.valid" type="submit">
+            Create Exam
+          </button>
+          <button class="btn btn-default" type="button" [routerLink]="['/exams']">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -31,5 +31,29 @@ namespace CourseApp.API.Helpers
             response.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationHeader, camelCaseFormatter));
             response.Headers.Add("Access-Control-Expose-Headers", "Pagination");
         }
+        public static void CreatePasswordHash(this string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        }
+        public static bool VerifyPasswordHash(this string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            {
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                if (computedHash.Length != passwordHash.Length)
+                    return false;
+                for (int i = 0; i < computedHash.Length; i++)
+                {
+                    if (passwordHash[i] != computedHash[i])
+                        return false;
+                }
+            }
+            return true;
+        }
     }
 }

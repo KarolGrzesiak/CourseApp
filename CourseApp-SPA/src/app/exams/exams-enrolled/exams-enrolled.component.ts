@@ -3,6 +3,7 @@ import { Exam } from 'src/app/_models/exam';
 import { ExamService } from 'src/app/_services/exam.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-exams-enrolled',
@@ -11,6 +12,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 })
 export class ExamsEnrolledComponent implements OnInit {
   exams: Exam[];
+  durationHelper = moment;
   constructor(
     private examService: ExamService,
     private alertify: AlertifyService,

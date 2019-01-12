@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { PaginatedResult } from '../_models/pagination';
-import { Exam } from '../_models/exam';
+import { Exam, ExamForCreation } from '../_models/exam';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -31,13 +31,16 @@ export class ExamService {
       })
     );
   }
-  addUserToExam(userId: number, examId: number) {
-    return this.http.post(this.baseUrl + 'exams/' + examId + '/enroll/' + userId, {});
+  addUserToExam(userId: number, examId: number, password: string) {
+    return this.http.post(this.baseUrl + 'exams/' + examId + '/enroll/' + userId, password);
   }
   getEnrolledExams(userId: number) {
     return this.http.get<Exam[]>(this.baseUrl + 'exams/' + 'enrolled/' + userId);
   }
   deleteExam(examId: number) {
     return this.http.delete(this.baseUrl + 'exams/' + examId);
+  }
+  createExam(exam: ExamForCreation) {
+    return this.http.post(this.baseUrl + 'exams', exam);
   }
 }

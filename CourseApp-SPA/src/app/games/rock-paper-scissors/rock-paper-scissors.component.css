@@ -1,0 +1,70 @@
+p {
+  font-family: Lato;
+}
+
+.container{
+  height: 700px;
+  width: 860px;
+  position: relative;
+  display: block;
+  margin: auto;
+  background-color: #47565a;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  border-radius: 5px;
+  overflow: hidden;
+
+}
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 2em;
+}
+.flex-container {
+  display: flex;
+  width: 100%;
+  color: white;
+
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+/* mat-card-content{
+  display:grid;
+  grid-template-columns: 2fr 1fr;
+} */
+
+.content1 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  color: white;
+}
+
+.score {
+  margin-top: 0.5em;
+  margin-left: 2em;
+  font-size: 1.5em;
+}
+.title-rps{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #18BC9C;
+}
+
+.content2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+}
+
+.fa {
+  cursor: pointer;
+  font-size: 5em;
+  color: white;
+}
+
+.selectedWeapon {
+  color: #18BC9C;
+}

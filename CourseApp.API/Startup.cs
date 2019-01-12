@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using CourseApp.API.Data;
+using CourseApp.API.Formatters;
 using CourseApp.API.Helpers;
 using CourseApp.API.IRepositories;
 using CourseApp.API.Model;
@@ -90,6 +91,7 @@ namespace CourseApp.API
                                         .RequireAuthenticatedUser()
                                         .Build();
                         options.Filters.Add(new AuthorizeFilter(policy));
+                        options.InputFormatters.Insert(0, new RawRequestBodyFormatter());
                     })
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                     .AddJsonOptions(options =>

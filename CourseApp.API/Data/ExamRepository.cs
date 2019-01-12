@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CourseApp.API.Data
 {
-    public class ExamRepository : RepositoryBase<Exam>, IExamRepository
+public class ExamRepository : RepositoryBase<Exam>, IExamRepository
     {
         private readonly DataContext _context;
         public ExamRepository(DataContext context) : base(context)
@@ -23,7 +23,7 @@ namespace CourseApp.API.Data
         }
 
 
-        public async Task<PagedList<Exam>> GetExamsAsync(int? pageNumber, int? pageSize, int userId)
+        public async Task<PagedList<Exam>> GetNotEnrolledExamsForUserAsync(int? pageNumber, int? pageSize, int userId)
         {
             var enrolledExams = await _context.UserExams.Where(ue => ue.UserId == userId).Select(ue => ue.Exam).ToListAsync();
             var exams = _context.Exams.Include(e => e.Questions).Include(e => e.Author).OrderByDescending(e => e.DatePublished)

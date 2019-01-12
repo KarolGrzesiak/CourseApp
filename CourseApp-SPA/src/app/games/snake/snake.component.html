@@ -1,6 +1,6 @@
 <div class="game-container mt-3 mb-2">
   <div class="game-header">
-    <h3 class="logo">Snake</h3>
+    <h1 class="logo">Snake</h1>
     <div class="score-block">
       <h3 class="score" [ngClass]="{ 'new-best-score': newBestScore }">Score: {{ score }}</h3>
       <h3 class="best-score" [ngClass]="{ 'new-best-score': newBestScore }">
@@ -16,7 +16,7 @@
     ></div>
   </div>
   <div class="start-button" [ngClass]="{ 'disable-clicks': gameStarted }" (click)="showMenu()">
-    Start Game
+   <button class="btn btn-success">Start Game</button>
   </div>
   <div class="new-game-menu" *ngIf="showMenuChecker">
     <span class="new-game-menu-label">Select Mode</span>

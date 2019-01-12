@@ -15,9 +15,13 @@ namespace CourseApp.API.Data
             _context = context;
 
         }
-        public async Task<IEnumerable<Exam>> GetExamsForUserAsync(int userId)
+        public async Task<IEnumerable<Exam>> GetEnrolledExamsForUserAsync(int userId)
         {
-            return await _context.UserExams.Include(ur => ur.Exam).Where(ur => ur.UserId == userId).Select(ur => ur.Exam).Include(e=>e.Author).ToListAsync();
+            return await _context.UserExams.Include(ur => ur.Exam).Where(ur => ur.UserId == userId).Select(ur => ur.Exam).Include(e => e.Author).ToListAsync();
+        }
+        public async Task<UserExam> GetUserWithExamAsync(int userId, int examId)
+        {
+            return await _context.UserExams.FirstOrDefaultAsync(ur => ur.UserId == userId && ur.ExamId == examId);
         }
 
     }
