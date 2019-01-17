@@ -46,11 +46,10 @@ namespace CourseApp.API.Controllers
 
             return Ok(examsForReturn);
         }
-        [HttpGet("enrolled/{userId}", Name = "GetEnrolledExamsForUserAsync")]
-        public async Task<IActionResult> GetEnrolledExamsForUserAsync(int userId)
+        [HttpGet("enrolled", Name = "GetEnrolledExamsForUserAsync")]
+        public async Task<IActionResult> GetEnrolledExamsForUserAsync()
         {
-            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                return Unauthorized();
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var examsFromRepo = await _repo.UserExamRepository.GetEnrolledExamsForUserAsync(userId);
             var examsForReturn = _mapper.Map<IEnumerable<ExamForListDto>>(examsFromRepo);
             return Ok(examsForReturn);

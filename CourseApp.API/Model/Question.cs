@@ -9,5 +9,6 @@ namespace CourseApp.API.Model
         public ICollection<Answer> Answers { get; set; }
         public int ExamId { get; set; }
         public Exam Exam { get; set; }
+        public string Type { get; set; }
     }
 }

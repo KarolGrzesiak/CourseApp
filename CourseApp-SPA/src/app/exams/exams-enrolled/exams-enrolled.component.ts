@@ -4,6 +4,7 @@ import { ExamService } from 'src/app/_services/exam.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-exams-enrolled',
@@ -16,7 +17,8 @@ export class ExamsEnrolledComponent implements OnInit {
   constructor(
     private examService: ExamService,
     private alertify: AlertifyService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
 
@@ -26,8 +28,7 @@ export class ExamsEnrolledComponent implements OnInit {
 
 
   loadEnrolledExams() {
-    const userId = this.authService.currentUser.id;
-    this.examService.getEnrolledExams(userId).subscribe(
+    this.examService.getEnrolledExams().subscribe(
       response => {
         this.exams = response;
       },
@@ -35,5 +36,8 @@ export class ExamsEnrolledComponent implements OnInit {
         this.alertify.error(error);
       }
     );
+  }
+  startExam(examId: number) {
+    this.router.navigate(['/exams/' + examId + '/take']);
   }
 }

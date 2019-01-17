@@ -9,5 +9,6 @@ namespace CourseApp.API.Dtos
         [Required]
         public string Content { get; set; }
         public ICollection<AnswerForCreationDto> Answers { get; set; }
+        public string Type { get; set; }
     }
 }

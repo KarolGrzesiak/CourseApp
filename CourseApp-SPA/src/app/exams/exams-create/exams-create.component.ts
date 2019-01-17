@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ExamService } from 'src/app/_services/exam.service';
-import { ExamForCreation } from 'src/app/_models/exam';
+import { ExamForCreation, Exam } from 'src/app/_models/exam';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 
 @Component({
@@ -69,17 +69,16 @@ export class ExamsCreateComponent implements OnInit {
     if (this.examForm.valid) {
       this.exam = Object.assign({}, this.examForm.value);
       this.examService.createExam(this.exam).subscribe(
-        () => {
-          this.alertify.success('Exam has been created');
+        (createdExam: Exam) => {
           this.examForm.reset();
+          this.router.navigate(['/exams/' + createdExam.id + '/questions/create']);
         },
         error => {
           this.alertify.error(error);
-        },
-        () => {
-
+          this.examForm.reset();
           this.router.navigate(['/exams']);
-        }
+        },
+        () => {}
       );
     }
   }

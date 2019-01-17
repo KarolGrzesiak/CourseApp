@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <form [formGroup]="questionForm" (ngSubmit)="nextQuestion()">
+        <h2 class="text-center text-primary">Question {{ count }}</h2>
+        <hr />
+
+        <div class="form-group">
+          <label class="control-label" style="margin-right:10px">Type of question:</label>
+          <label class="radio-inline">
+            <input
+              class="mr-3"
+              type="radio"
+              value="Text"
+              formControlName="type"
+              (click)="createAnswers()"
+            />Text
+          </label>
+          <label class="radio-inline ml-3">
+            <input
+              class="mr-3"
+              type="radio"
+              value="MultipleChoice"
+              formControlName="type"
+              (click)="createAnswers()"
+            />Multiple choice
+          </label>
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                questionForm.get('questionContent').errors &&
+                questionForm.get('questionContent').touched
+            }"
+            formControlName="questionContent"
+            placeholder="Content"
+          />
+          <div class="invalid-feedback">Actual question is necessary</div>
+        </div>
+
+        <h3 class="text-center text-primary">Answers</h3>
+
+        <div formArrayName="answers">
+          <div class="mb-2" *ngFor="let answer of answers.controls; let i = index">
+            <div [formGroupName]="i">
+              <label>
+                <input
+                  formControlName="answerContent"
+                  type="text"
+                  class="form-control answer-content"
+                  placeholder="Content"
+                  [ngClass]="{
+                    'is-invalid': answer.touched && answer.invalid
+                  }"
+                />
+                <div class="invalid-feedback">Answers are required</div>
+              </label>
+
+              <label class="radio-inline">
+                <input
+                  type="radio"
+                  value="true"
+                  checked="true"
+                  (click)="chooseCorrectAnswer(i)"
+                  formControlName="isCorrect"
+                />Correct
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group text-center">
+          <button class="btn btn-success mr-2" [disabled]="!questionForm.valid" type="button"
+          (click)="finish()" [routerLink]="['/exams']">
+            Finish
+          </button>
+          <button
+            class="btn btn-default mr-2"
+            type="button"
+            [routerLink]="['/exams']"
+
+          >
+            Cancel
+          </button>
+          <button class="btn btn-primary" [disabled]="!questionForm.valid" type="submit" >
+            Next
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

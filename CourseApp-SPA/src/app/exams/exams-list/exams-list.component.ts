@@ -71,7 +71,6 @@ export class ExamsListComponent implements OnInit {
     const examPassword = this.examToEnrollPassword;
     this.examToEnroll = null;
     this.examToEnrollPassword = null;
-
     this.examService.addUserToExam(userId, examId, examPassword).subscribe(
       () => {
         this.exams.splice(this.exams.findIndex(e => e.id === examId), 1);

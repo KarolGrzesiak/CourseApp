@@ -8,7 +8,7 @@ namespace CourseApp.API.Dtos
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
-        public double Duration { get; set; }
+        public double? Duration { get; set; }
         public DateTime DatePublished { get; set; }
         [Required]
         public string Password { get; set; }

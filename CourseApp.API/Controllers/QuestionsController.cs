@@ -24,9 +24,9 @@ namespace CourseApp.API.Controllers
         }
 
         [HttpGet("{questionId}", Name = "GetQuestionAsync")]
-        public async Task<IActionResult> GetQuestionAsync(int examId, int questionId)
+        public async Task<IActionResult> GetQuestionAsync(int questionId)
         {
-            var questionFromRepo = await _repo.QuestionRepository.GetQuestionAsync(examId, questionId);
+            var questionFromRepo = await _repo.QuestionRepository.GetQuestionAsync(questionId);
             if (questionFromRepo == null)
                 return NotFound();
             var questionForReturn = _mapper.Map<QuestionForReturnDto>(questionFromRepo);
@@ -42,7 +42,7 @@ namespace CourseApp.API.Controllers
 
         [Authorize(Policy = "RequireTeacherRole")]
         [HttpPost]
-        public async Task<IActionResult> CreateQuestion(int examId, QuestionForCreationDto questionForCreation)
+        public async Task<IActionResult> CreateQuestionAsync(int examId, QuestionForCreationDto questionForCreation)
         {
             var exam = await _repo.ExamRepository.GetExamAsync(examId);
             if (exam == null)
@@ -56,7 +56,7 @@ namespace CourseApp.API.Controllers
             {
 
                 var questionForReturn = _mapper.Map<QuestionForReturnDto>(question);
-                return CreatedAtRoute("GetQuestionAsync", new { examId = examId, questionId = question.Id }, questionForReturn);
+                return CreatedAtRoute("GetQuestionAsync", new { questionId = question.Id }, questionForReturn);
             }
 
             return BadRequest("Failed to save a question");
@@ -66,9 +66,9 @@ namespace CourseApp.API.Controllers
 
         [Authorize(Policy = "RequireTeacherRole")]
         [HttpDelete("{questionId}")]
-        public async Task<IActionResult> DeleteQuestion(int examId, int questionId)
+        public async Task<IActionResult> DeleteQuestionAsync(int examId, int questionId)
         {
-            var question = await _repo.QuestionRepository.GetQuestionAsync(examId, questionId);
+            var question = await _repo.QuestionRepository.GetQuestionAsync(questionId);
             if (question == null)
                 return BadRequest("Question not exists");
             if (question.Exam.AuthorId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))

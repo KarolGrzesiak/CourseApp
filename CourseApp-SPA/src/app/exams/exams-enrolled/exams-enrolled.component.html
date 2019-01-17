@@ -1,26 +1,24 @@
-<div *ngIf="exams?.length>0">
-<div class="row">
-  <table class="table">
-    <tr>
-      <th style="width: 10%">Exam</th>
-      <th style="width: 30%">Author</th>
-      <th style="width: 40%">Description</th>
-      <th style="width: 20%"></th>
-      <th style="width: 20%">Duration</th>
-
-
-    </tr>
-    <tr *ngFor="let exam of exams">
-      <td>{{ exam.name }}</td>
-      <td>{{ exam.authorKnownAs }}</td>
-      <td>{{ exam.description }}</td>
-      <td><button class="btn btn-info">Start</button></td>
-      <td *ngIf="exam.duration!=null">{{ durationHelper.duration(exam.duration).asMinutes() }} Minutes</td>
-      <td *ngIf="exam.duration===null">Not set</td>
-
-
-    </tr>
-  </table>
+<div *ngIf="exams?.length > 0">
+  <div class="row">
+    <table class="table">
+      <tr>
+        <th style="width: 10%">Exam</th>
+        <th style="width: 30%">Author</th>
+        <th style="width: 40%">Description</th>
+        <th style="width: 20%"></th>
+        <th style="width: 20%">Duration</th>
+      </tr>
+      <tr *ngFor="let exam of exams">
+        <td>{{ exam.name }}</td>
+        <td>{{ exam.authorKnownAs }}</td>
+        <td>{{ exam.description }}</td>
+        <td><button class="btn btn-info" (click)="startExam(exam.id)">Start</button></td>
+        <td *ngIf="exam.duration != null">
+          {{ durationHelper.duration(exam.duration).asMinutes() }} Minutes
+        </td>
+        <td *ngIf="exam.duration === null">Not set</td>
+      </tr>
+    </table>
+  </div>
 </div>
-</div>
-  <div *ngIf="exams?.length==0">No enrolled tests</div>
+<div *ngIf="exams?.length == 0">No enrolled tests</div>

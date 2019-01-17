@@ -16,9 +16,9 @@ namespace CourseApp.API.Data
 
         }
 
-        public async Task<Question> GetQuestionAsync(int examId, int questionId)
+        public async Task<Question> GetQuestionAsync(int questionId)
         {
-            return await _context.Questions.Include(q => q.Answers).FirstOrDefaultAsync(q => q.Id == questionId && q.ExamId == examId);
+            return await _context.Questions.Include(q => q.Answers).Include(a => a.Exam).FirstOrDefaultAsync(q => q.Id == questionId);
         }
 
         public async Task<IEnumerable<Question>> GetQuestionsAsync(int examId)

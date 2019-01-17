@@ -39,13 +39,14 @@ namespace CourseApp.API.Helpers
                 .ForMember(dest => dest.SenderPhotoUrl, opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
                 .ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
             CreateMap<ExamForCreationDto, Exam>()
-                .ForMember(dest => dest.Duration, opt => opt.MapFrom(src => TimeSpan.FromMinutes(src.Duration)));
+                .ForMember(dest => dest.Duration, opt => opt.MapFrom(src => (src.Duration != null) ? TimeSpan.FromMinutes(src.Duration.Value) : (TimeSpan?)null));
 
             CreateMap<Exam, ExamForListDto>()
                 .ForMember(dest => dest.AuthorKnownAs, opt => opt.MapFrom(src => src.Author.KnownAs));
             CreateMap<Question, QuestionForReturnDto>();
             CreateMap<QuestionForCreationDto, Question>();
             CreateMap<AnswerForCreationDto, Answer>();
+            CreateMap<Answer, AnswerForReturnDto>();
         }
 
 

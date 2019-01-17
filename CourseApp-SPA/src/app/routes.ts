@@ -16,6 +16,9 @@ import { ExamsPanelComponent } from './exams/exams-panel/exams-panel.component';
 import { SnakeComponent } from './games/snake/snake.component';
 import { ExamsCreateComponent } from './exams/exams-create/exams-create.component';
 import { RockPaperScissorsComponent } from './games/rock-paper-scissors/rock-paper-scissors.component';
+import { QuestionsCreateComponent } from './exams/questions-create/questions-create.component';
+import { ExamsTakeComponent } from './exams/exams-take/exams-take.component';
+import { ExamTakeResolver } from './_resolvers/exam-take.resolver';
 
 export const appRoutes: Routes = [
   {
@@ -53,6 +56,17 @@ export const appRoutes: Routes = [
         path: 'exams/create',
         component: ExamsCreateComponent,
         canDeactivate: [PreventUnsavedChanges]
+      },
+
+      {
+        path: 'exams/:examId/questions/create',
+        component: QuestionsCreateComponent,
+        canDeactivate: [PreventUnsavedChanges]
+      },
+      {
+        path: 'exams/:examId/take',
+        component: ExamsTakeComponent,
+        resolve: { questionsWithAnswers: ExamTakeResolver }
       },
 
       { path: 'messages', component: MessagesComponent, resolve: { messages: MessagesResolver } },

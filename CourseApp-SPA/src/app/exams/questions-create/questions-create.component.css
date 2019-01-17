@@ -1,0 +1,7 @@
+label {
+  display: inline-table;
+}
+input.answer-content {
+  width: 645px;
+  margin-right: 20px;
+}

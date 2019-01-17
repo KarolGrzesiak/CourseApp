@@ -36,32 +36,27 @@ export class ExamsPanelComponent implements OnInit {
       exams: this.getExamsForUser()
     };
     this.bsModalRef = this.modalService.show(ExamsDeleteModalComponent, { initialState });
-    this.bsModalRef.content.deleteExams.subscribe(
-      (result: Exam[]) => {
-        result.forEach(
-          element => {
-            this.examService.deleteExam(element.id).subscribe(() => {
+    this.bsModalRef.content.deleteExams.subscribe((result: Exam[]) => {
+      result.forEach(element => {
+        this.examService.deleteExam(element.id).subscribe(
+          () => {
+            const indexInEnrolled = this.enrolledExams.exams.findIndex(e => e.id === element.id);
+            if (indexInEnrolled === -1) {
+              this.examsList.exams.splice(this.examsList.exams.findIndex(e => e.id === element.id), 1);
+            } else {
               this.enrolledExams.exams.splice(
-                this.enrolledExams.exams.findIndex(e => e.id === element.id)
-              );
-              this.examsList.exams.splice(
-                this.examsList.exams.findIndex(e => e.id === element.id),
+                indexInEnrolled,
                 1
               );
-            });
+            }
           },
           error => {
             this.alertify.error(error);
-          },
-
+          }
         );
-        this.alertify.success('Exams have been deleted');
-
-      },
-      error => {
-        this.alertify.error(error);
-      }
-    );
+      });
+      this.alertify.success('Exams have been deleted');
+    });
   }
 
   private getExamsForUser() {

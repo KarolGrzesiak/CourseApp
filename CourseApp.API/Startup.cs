@@ -130,7 +130,7 @@ namespace CourseApp.API
             // app.UseHttpsRedirection();
             seeder.SeedUsersAndRoles();
             app.UseAuthentication();
-            app.UseCors(c => c.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(c => c.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
 
             app.UseMvc();
         }

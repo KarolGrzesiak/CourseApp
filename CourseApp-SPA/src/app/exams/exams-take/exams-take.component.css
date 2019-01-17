@@ -1,0 +1,19 @@
+.form-control:disabled{
+    color: #fff;
+    background-color: #2C3E50;
+    background-clip: padding-box;
+        font-weight: bold;
+    font-size: 110%;
+
+}
+label.radio-inline{
+    font-weight: bold;
+    color: #7b8a8b;
+    font-size: 110%;
+}
+hr{
+    margin-top: 2.5rem;
+}
+.btn{
+    width: 100%;
+}

@@ -5,6 +5,8 @@ import { Observable, Subject } from 'rxjs';
 import { PaginatedResult } from '../_models/pagination';
 import { Exam, ExamForCreation } from '../_models/exam';
 import { map } from 'rxjs/operators';
+import { Question } from '../_models/question';
+import { Answer } from '../_models/answer';
 
 @Injectable({
   providedIn: 'root'
@@ -34,13 +36,30 @@ export class ExamService {
   addUserToExam(userId: number, examId: number, password: string) {
     return this.http.post(this.baseUrl + 'exams/' + examId + '/enroll/' + userId, password);
   }
-  getEnrolledExams(userId: number) {
-    return this.http.get<Exam[]>(this.baseUrl + 'exams/' + 'enrolled/' + userId);
+  getEnrolledExams() {
+    return this.http.get<Exam[]>(this.baseUrl + 'exams/' + 'enrolled');
   }
   deleteExam(examId: number) {
     return this.http.delete(this.baseUrl + 'exams/' + examId);
   }
   createExam(exam: ExamForCreation) {
     return this.http.post(this.baseUrl + 'exams', exam);
+  }
+
+  createQuestion(question, examId: number) {
+    return this.http.post(this.baseUrl + 'exams/' + examId + '/questions/', question);
+  }
+  createAnswer(answer, questionId: number) {
+    return this.http.post(this.baseUrl + 'exams/' + 'questions/' + questionId + '/answers', answer);
+  }
+  createAnswers(answers: any, questionId: number) {
+    return this.http.post(
+      this.baseUrl + 'exams/' + 'questions/' + questionId + '/answers/create',
+      answers
+    );
+  }
+
+  getQuestionsWithAnswers(examId: number) {
+    return this.http.get(this.baseUrl + 'exams/' + examId + '/questions');
   }
 }

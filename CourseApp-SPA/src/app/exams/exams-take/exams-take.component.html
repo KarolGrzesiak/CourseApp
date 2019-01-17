@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <form>
+        <div *ngFor="let question of questionsWithAnswers; let i = index">
+          <h2 class="text-center text-primary mt-4 mb-4">Question {{ i + 1 }}</h2>
+
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              value="{{ question.content }}"
+              [disabled]="true"
+            />
+          </div>
+          <h2 class="text-center text-primary mb-2">Answer</h2>
+          <div class="form-group mb-2" *ngIf="question.type == 'multipleChoice'">
+            <div *ngFor="let answer of question.answers">
+              <label class="radio-inline">
+                <input type="radio" value="true" /> {{ answer.content }}
+              </label>
+            </div>
+          </div>
+          <div class="form-group mb-2" *ngIf="question.type == 'text'">
+            <textarea row="2" class="form-control" placeholder="Write your answer here"></textarea>
+          </div>
+          <hr />
+        </div>
+        <div class="form-group text-center">
+          <button class="btn btn-success mr-2" type="submit"> Finish </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

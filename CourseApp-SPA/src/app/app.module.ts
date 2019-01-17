@@ -38,6 +38,10 @@ import { ScoreService } from './_services/score.service';
 import { ExamsCreateComponent } from './exams/exams-create/exams-create.component';
 import { ExamsDeleteModalComponent } from './exams/exams-delete-modal/exams-delete-modal.component';
 import { RockPaperScissorsComponent } from './games/rock-paper-scissors/rock-paper-scissors.component';
+import { QuestionsCreateComponent } from './exams/questions-create/questions-create.component';
+import { ExamsTakeComponent } from './exams/exams-take/exams-take.component';
+import { ExamTakeResolver } from './_resolvers/exam-take.resolver';
+
 
 import {
   BsDropdownModule,
@@ -92,7 +96,10 @@ export function tokenGetter() {
     SnakeComponent,
     ExamsCreateComponent,
     ExamsDeleteModalComponent,
-    RockPaperScissorsComponent
+    RockPaperScissorsComponent,
+    QuestionsCreateComponent,
+    ExamsTakeComponent,
+
   ],
   imports: [
     JwtModule.forRoot({
@@ -140,7 +147,8 @@ export function tokenGetter() {
     AdminService,
     ExamService,
     ExamListResolver,
-    ScoreService
+    ScoreService,
+    ExamTakeResolver
   ],
   entryComponents: [RolesModalComponent, ExamsDeleteModalComponent],
   bootstrap: [AppComponent]
