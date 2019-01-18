@@ -54,7 +54,7 @@ namespace CourseApp.API.Data
                     .HasKey(ue => new { ue.UserId, ue.ExamId });
 
             builder.Entity<UserAnswer>()
-                    .HasKey(ua => new { ua.UserId, ua.AnswerId });
+                    .HasKey(ua => new { ua.UserId, ua.QuestionId });
 
         }
     }

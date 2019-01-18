@@ -229,13 +229,13 @@ namespace CourseApp.API.Migrations
                 {
                     b.Property<int>("UserId");
 
-                    b.Property<int>("AnswerId");
+                    b.Property<int>("QuestionId");
 
                     b.Property<string>("Content");
 
-                    b.HasKey("UserId", "AnswerId");
+                    b.HasKey("UserId", "QuestionId");
 
-                    b.HasIndex("AnswerId");
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("UserAnswers");
                 });
@@ -381,9 +381,9 @@ namespace CourseApp.API.Migrations
 
             modelBuilder.Entity("CourseApp.API.Model.UserAnswer", b =>
                 {
-                    b.HasOne("CourseApp.API.Model.Answer", "Answer")
+                    b.HasOne("CourseApp.API.Model.Question", "Question")
                         .WithMany()
-                        .HasForeignKey("AnswerId")
+                        .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CourseApp.API.Model.User", "User")

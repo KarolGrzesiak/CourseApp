@@ -47,6 +47,7 @@ namespace CourseApp.API.Helpers
             CreateMap<QuestionForCreationDto, Question>();
             CreateMap<AnswerForCreationDto, Answer>();
             CreateMap<Answer, AnswerForReturnDto>();
+            CreateMap<UserAnswersForCreationDto, UserAnswer>();
         }
 
 

@@ -19,13 +19,11 @@ export class ExamsEnrolledComponent implements OnInit {
     private alertify: AlertifyService,
     private authService: AuthService,
     private router: Router
-  ) { }
-
+  ) {}
 
   ngOnInit() {
     this.loadEnrolledExams();
   }
-
 
   loadEnrolledExams() {
     this.examService.getEnrolledExams().subscribe(
@@ -37,7 +35,8 @@ export class ExamsEnrolledComponent implements OnInit {
       }
     );
   }
-  startExam(examId: number) {
+  startExam(examId: number, examDuration) {
+    localStorage.setItem('minutes', examDuration);
     this.router.navigate(['/exams/' + examId + '/take']);
   }
 }

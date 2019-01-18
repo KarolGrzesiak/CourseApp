@@ -82,4 +82,14 @@ export class ExamsCreateComponent implements OnInit {
       );
     }
   }
+  cancel() {
+    if (this.examForm.dirty) {
+      this.alertify.confirm('Are you sure?', () => {
+        this.examForm.reset();
+        this.router.navigate(['/exams']);
+      });
+    } else {
+      this.router.navigate(['/exams']);
+    }
+  }
 }

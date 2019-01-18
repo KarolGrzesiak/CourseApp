@@ -116,6 +116,37 @@ namespace CourseApp.API.Controllers
             }
             return BadRequest("Failed to delete exam");
         }
+        [HttpGet("{examId}/userId/answers", Name = "GetUserAnswersAsync")]
+        public async Task<IActionResult> GetUserAnswersAsync(int examId, int userId)
+        {
+            var userAnswers = await _repo.UserAnswerRepository.GetUserAnswersAsync(examId, userId);
+            if (userAnswers == null)
+                return NotFound();
+            return Ok(userAnswers);
+        }
+
+        [HttpPost("{examId}/take")]
+        public async Task<IActionResult> CreateUserAnswersAsync(int examId, IEnumerable<UserAnswersForCreationDto> userAnswersForCreation)
+        {
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userExam = await _repo.UserExamRepository.GetUserWithExamAsync(userId, examId);
+            if (userExam == null)
+            {
+                return Unauthorized();
+            }
+            var userAnswers = _mapper.Map<IEnumerable<UserAnswer>>(userAnswersForCreation);
+            foreach (var userAnswer in userAnswers)
+            {
+                userAnswer.UserId = userId;
+                _repo.UserAnswerRepository.Add(userAnswer);
+            }
+            if (await _repo.SaveAllAsync())
+            {
+                return CreatedAtRoute("GetUserAnswersAsync", new { examId = examId, userId = userId }, userAnswers);
+            }
+            return BadRequest("Failed to save user's answers");
+
+        }
 
 
 

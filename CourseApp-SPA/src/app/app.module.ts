@@ -42,14 +42,14 @@ import { QuestionsCreateComponent } from './exams/questions-create/questions-cre
 import { ExamsTakeComponent } from './exams/exams-take/exams-take.component';
 import { ExamTakeResolver } from './_resolvers/exam-take.resolver';
 
-
 import {
   BsDropdownModule,
   BsDatepickerModule,
   PaginationModule,
   TabsModule,
   ButtonsModule,
-  ModalModule
+  ModalModule,
+  ProgressbarModule
 } from 'ngx-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AlertifyService } from './_services/alertify.service';
@@ -98,8 +98,7 @@ export function tokenGetter() {
     ExamsDeleteModalComponent,
     RockPaperScissorsComponent,
     QuestionsCreateComponent,
-    ExamsTakeComponent,
-
+    ExamsTakeComponent
   ],
   imports: [
     JwtModule.forRoot({
@@ -131,7 +130,8 @@ export function tokenGetter() {
     NgCircleProgressModule.forRoot({
       titleColor: '#ffffff',
       unitsColor: '#ffffff'
-    })
+    }),
+    ProgressbarModule.forRoot()
   ],
   providers: [
     AlertifyService,

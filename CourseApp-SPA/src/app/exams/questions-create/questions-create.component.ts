@@ -29,7 +29,8 @@ export class QuestionsCreateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private examService: ExamService,
     private alertify: AlertifyService,
-  ) { }
+    private router: Router
+  ) {}
 
   canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
     if (this.questionForm.dirty) {
@@ -131,9 +132,13 @@ export class QuestionsCreateComponent implements OnInit {
               isCorrect: control.controls[i].get('isCorrect').value
             });
           }
-          this.examService.createAnswers(answers, question.id).subscribe(() => {
-            this.alertify.success('Exam completed');
-          }, error => {
+          this.examService.createAnswers(answers, question.id).subscribe(
+            () => {
+              this.questionForm.reset();
+              this.alertify.success('Exam completed');
+              this.router.navigate(['/exams']);
+            },
+            error => {
               this.alertify.error(error);
             }
           );
@@ -142,6 +147,17 @@ export class QuestionsCreateComponent implements OnInit {
           this.alertify.error(error);
         }
       );
+    }
+  }
+  cancel() {
+    if (this.questionForm.dirty) {
+      this.alertify.confirm('Are you sure?', () => {
+        this.questionForm.reset();
+        this.router.navigate(['/exams']);
+      });
+    } else {
+      this.questionForm.reset();
+      this.router.navigate(['/exams']);
     }
   }
   nextQuestion() {
@@ -160,13 +176,15 @@ export class QuestionsCreateComponent implements OnInit {
               isCorrect: control.controls[i].get('isCorrect').value
             });
           }
-          this.examService.createAnswers(answers, question.id).subscribe(() => {
-            this.questionForm.reset();
-            this.createQuestionForm();
-            this.alertify.success(this.count + ' Question created');
-            this.count++;
-          }, error => {
-            this.alertify.error(error);
+          this.examService.createAnswers(answers, question.id).subscribe(
+            () => {
+              this.questionForm.reset();
+              this.createQuestionForm();
+              this.alertify.success(this.count + ' Question created');
+              this.count++;
+            },
+            error => {
+              this.alertify.error(error);
             }
           );
         },

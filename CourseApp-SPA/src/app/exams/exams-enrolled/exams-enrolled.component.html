@@ -12,7 +12,7 @@
         <td>{{ exam.name }}</td>
         <td>{{ exam.authorKnownAs }}</td>
         <td>{{ exam.description }}</td>
-        <td><button class="btn btn-info" (click)="startExam(exam.id)">Start</button></td>
+        <td><button class="btn btn-info" (click)="startExam(exam.id,durationHelper.duration(exam.duration).asMinutes() )">Start</button></td>
         <td *ngIf="exam.duration != null">
           {{ durationHelper.duration(exam.duration).asMinutes() }} Minutes
         </td>

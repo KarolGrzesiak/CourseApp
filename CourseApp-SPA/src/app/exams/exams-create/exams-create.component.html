@@ -108,7 +108,7 @@
           <button class="btn btn-success mr-2" [disabled]="!examForm.valid" type="submit">
             Create Exam
           </button>
-          <button class="btn btn-default" type="button" [routerLink]="['/exams']">Cancel</button>
+          <button class="btn btn-default" type="button" (click)="cancel()" >Cancel</button>
         </div>
       </form>
     </div>

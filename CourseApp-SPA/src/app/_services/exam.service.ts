@@ -62,4 +62,8 @@ export class ExamService {
   getQuestionsWithAnswers(examId: number) {
     return this.http.get(this.baseUrl + 'exams/' + examId + '/questions');
   }
+
+  createUserAnswers(answers, examId) {
+    return this.http.post(this.baseUrl + 'exams/' + examId + '/take', answers);
+  }
 }
