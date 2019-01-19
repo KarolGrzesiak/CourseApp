@@ -2979,6 +2979,31 @@
           }
         }
       },
+      "MockQueryable.Core/1.0.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "2.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/MockQueryable.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MockQueryable.dll": {}
+        }
+      },
+      "MockQueryable.Moq/1.0.3": {
+        "type": "package",
+        "dependencies": {
+          "MockQueryable.Core": "1.0.3",
+          "Moq": "4.8.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/MockQueryable.Moq.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MockQueryable.Moq.dll": {}
+        }
+      },
       "Moq/4.10.1": {
         "type": "package",
         "dependencies": {
@@ -7975,6 +8000,28 @@
         "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "MockQueryable.Core/1.0.3": {
+      "sha512": "pHgWym/bnp/L8M7y5M/OxniP+BrcxWKUgLVhxBqBeLqF+9THmGnWP6/vNAX/gpmq+5ftQU7ZfhMy+7daeZ/OZg==",
+      "type": "package",
+      "path": "mockqueryable.core/1.0.3",
+      "files": [
+        ".signature.p7s",
+        "lib/netstandard2.0/MockQueryable.dll",
+        "mockqueryable.core.1.0.3.nupkg.sha512",
+        "mockqueryable.core.nuspec"
+      ]
+    },
+    "MockQueryable.Moq/1.0.3": {
+      "sha512": "qwsq/dTs8q3yAR0G0arK7QX4LgAz4dodT7tZ3OHKTkY06c9WtuBQ8NakJWqi5QIyEbm7qy2208uRSsqx7o10Sw==",
+      "type": "package",
+      "path": "mockqueryable.moq/1.0.3",
+      "files": [
+        ".signature.p7s",
+        "lib/netstandard2.0/MockQueryable.Moq.dll",
+        "mockqueryable.moq.1.0.3.nupkg.sha512",
+        "mockqueryable.moq.nuspec"
       ]
     },
     "Moq/4.10.1": {
@@ -13524,6 +13571,7 @@
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.NET.Test.Sdk >= 15.7.0",
       "Microsoft.NETCore.App >= 2.1.0",
+      "MockQueryable.Moq >= 1.0.3",
       "Moq >= 4.10.1",
       "xunit >= 2.3.1",
       "xunit.runner.visualstudio >= 2.3.1"
@@ -13588,6 +13636,10 @@
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
+          },
+          "MockQueryable.Moq": {
+            "target": "Package",
+            "version": "[1.0.3, )"
           },
           "Moq": {
             "target": "Package",

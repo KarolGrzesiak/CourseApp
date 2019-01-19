@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using CourseApp.API;
@@ -92,6 +93,34 @@ namespace CourseApp.Tests.BusinessLogic
 
             var result = await controllerMock.Register(userForRegister);
             Assert.IsType<BadRequestObjectResult>(result);
+        }
+        [Fact]
+        public async Task Login_ValidRequest_ReturnsOkResult()
+        {
+            var userForLogin = new UserForLoginDto
+            {
+                UserName = "test",
+                Password = "test"
+            };
+
+            var user = new User()
+            {
+                UserName = "test",
+                PasswordHash = "test"
+            };
+            var userForList = new UserForListDto()
+            {
+                Username = "test"
+            };
+            var mapperMock = new Mock<IMapper>();
+            mapperMock.Setup(m => m.Map<UserForListDto>(It.IsAny<User>())).Returns(() => userForList);
+            var configurationMock = new Mock<IConfiguration>();
+            var userManagerMock = new Mock<FakeUserManager>();
+            var signInManagerMock = new Mock<FakeSignInManager>();
+
+            var controllerMock = new AuthController(configurationMock.Object, mapperMock.Object, userManagerMock.Object, signInManagerMock.Object);
+
+
         }
 
 
