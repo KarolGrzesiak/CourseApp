@@ -134,7 +134,7 @@ namespace CourseApp.API.Controllers
             }
             return BadRequest("Failed to delete exam");
         }
-        [HttpGet("{examId}/userId/answers", Name = "GetUserAnswersAsync")]
+        [HttpGet("{examId}/{userId}/answers", Name = "GetUserAnswersAsync")]
         public async Task<IActionResult> GetUserAnswersAsync(int examId, int userId)
         {
             var userAnswers = await _repo.UserAnswerRepository.GetUserAnswersAsync(examId, userId);
