@@ -1,29 +1,35 @@
 <div class="container">
-<ngc-float-button icon="add" color="" *appHasRole="['Teacher']" class="test">
-  <ngc-float-item-button
-    icon="delete"
-    content="Delete Exam"
-    color=""
-    (click)="deleteExamsModal()"
-  ></ngc-float-item-button>
-  <ngc-float-item-button
-    icon="create"
-    content="Create Exam"
-    color=""
-    [routerLink]="['/exams/create']"
-  ></ngc-float-item-button>
-</ngc-float-button>
+  <ngc-float-button icon="add" color="" *appHasRole="['Teacher']" class="test">
+    <ngc-float-item-button
+      icon="delete"
+      content="Delete Exam"
+      color=""
+      (click)="deleteExamsModal()"
+    ></ngc-float-item-button>
+    <ngc-float-item-button
+      icon="create"
+      content="Create Exam"
+      color=""
+      [routerLink]="['/exams/create']"
+    ></ngc-float-item-button>
+  </ngc-float-button>
 
-<div class="container mt-3">
-  <div class="tab-panel">
-    <tabset class="member-tabset">
-      <tab heading="Available Tests">
-        <div class="container"><app-exams-list></app-exams-list></div>
-      </tab>
-      <tab heading="Enrolled Tests" (select)="enrollOnExam()">
-        <div class="container"><app-exams-enrolled></app-exams-enrolled></div>
-      </tab>
-    </tabset>
+  <div class="container mt-3">
+    <div class="tab-panel">
+      <tabset class="member-tabset">
+        <tab heading="Available Tests">
+          <div class="container"><app-exams-list></app-exams-list></div>
+        </tab>
+        <tab heading="Enrolled Tests" (select)="showEnrolledExams()">
+          <div class="container"><app-exams-enrolled></app-exams-enrolled></div>
+        </tab>
+        <tab heading="Finished Tests" (select)="showFinishedExams()">
+          <div class="container"><app-exams-finished></app-exams-finished></div>
+        </tab>
+        <tab *appHasRole="['Teacher']" heading="Your Tests" (select)="showCreatedExams()">
+          <div class="container"><app-exams-owned></app-exams-owned></div>
+        </tab>
+      </tabset>
+    </div>
   </div>
-</div>
 </div>

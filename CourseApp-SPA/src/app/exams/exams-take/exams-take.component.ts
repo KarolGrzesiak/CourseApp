@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ExamService } from 'src/app/_services/exam.service';
 import { UserService } from 'src/app/_services/user.service';
@@ -16,9 +16,27 @@ export class ExamsTakeComponent implements OnInit {
   questionsWithAnswers: Question[];
   userAnswers = [''];
   time: number;
-
+  finishFlag = false;
   interval: Observable<number>;
+  subscription: Subscription;
   counter: number;
+
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHander(event) {
+    event.returnValue = false;
+  }
+
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (this.finishFlag === false) {
+      const result = confirm('Do you want to finish?');
+      if (result === true) {
+        this.finish();
+      }
+      return result;
+    }
+    return true;
+  }
+
   constructor(
     private alertify: AlertifyService,
     private examService: ExamService,
@@ -33,13 +51,14 @@ export class ExamsTakeComponent implements OnInit {
     });
     this.userAnswers = Array(this.questionsWithAnswers.length).fill('');
     this.time = +localStorage.getItem('minutes');
-    this.counter = 0;
+    this.counter = +localStorage.getItem('counter');
     this.interval = interval(60000);
-    this.interval.subscribe(() => {
+    this.subscription = this.interval.subscribe(() => {
       if (this.time <= 0) {
         return;
       }
       this.counter++;
+      localStorage.setItem('counter', this.counter.toString());
       if (this.counter === this.time) {
         this.alertify.error('Times up');
         this.finish();
@@ -48,6 +67,10 @@ export class ExamsTakeComponent implements OnInit {
   }
 
   finish() {
+    this.finishFlag = true;
+    this.subscription.unsubscribe();
+    localStorage.removeItem('minutes');
+    localStorage.removeItem('counter');
     const answers = [];
     for (let i = 0; i < this.questionsWithAnswers.length; i++) {
       answers.push({
@@ -64,10 +87,8 @@ export class ExamsTakeComponent implements OnInit {
         },
         error => {
           this.alertify.error(error);
-        },
-        () => {
-          this.router.navigate(['/exams']);
         }
       );
+    this.router.navigate(['/exams']);
   }
 }

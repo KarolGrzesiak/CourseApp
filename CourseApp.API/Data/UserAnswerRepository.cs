@@ -17,7 +17,7 @@ namespace CourseApp.API.Data
         }
         public async Task<IEnumerable<UserAnswer>> GetUserAnswersAsync(int examId, int userId)
         {
-            return await _context.UserAnswers.Include(ur => ur.Question).Where(ur => ur.UserId == userId && ur.Question.ExamId == examId).ToListAsync();
+            return await _context.UserAnswers.Include(ur => ur.Question).ThenInclude(q => q.Answers).Where(ur => ur.UserId == userId && ur.Question.ExamId == examId).ToListAsync();
         }
 
     }

@@ -41,6 +41,8 @@ import { RockPaperScissorsComponent } from './games/rock-paper-scissors/rock-pap
 import { QuestionsCreateComponent } from './exams/questions-create/questions-create.component';
 import { ExamsTakeComponent } from './exams/exams-take/exams-take.component';
 import { ExamTakeResolver } from './_resolvers/exam-take.resolver';
+import { ExamsFinishedComponent } from './exams/exams-finished/exams-finished.component';
+import { ExamsOwnedComponent } from './exams/exams-owned/exams-owned.component';
 
 import {
   BsDropdownModule,
@@ -49,7 +51,8 @@ import {
   TabsModule,
   ButtonsModule,
   ModalModule,
-  ProgressbarModule
+  ProgressbarModule,
+  AccordionModule
 } from 'ngx-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AlertifyService } from './_services/alertify.service';
@@ -98,7 +101,10 @@ export function tokenGetter() {
     ExamsDeleteModalComponent,
     RockPaperScissorsComponent,
     QuestionsCreateComponent,
-    ExamsTakeComponent
+    ExamsTakeComponent,
+    ExamsFinishedComponent,
+    ExamsOwnedComponent,
+
   ],
   imports: [
     JwtModule.forRoot({
@@ -131,7 +137,8 @@ export function tokenGetter() {
       titleColor: '#ffffff',
       unitsColor: '#ffffff'
     }),
-    ProgressbarModule.forRoot()
+    ProgressbarModule.forRoot(),
+    AccordionModule.forRoot()
   ],
   providers: [
     AlertifyService,

@@ -37,6 +37,7 @@ export class ExamsEnrolledComponent implements OnInit {
   }
   startExam(examId: number, examDuration) {
     localStorage.setItem('minutes', examDuration);
+    localStorage.setItem('counter', '0');
     this.router.navigate(['/exams/' + examId + '/take']);
   }
 }

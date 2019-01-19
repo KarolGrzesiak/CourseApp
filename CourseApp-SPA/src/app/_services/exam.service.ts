@@ -39,6 +39,9 @@ export class ExamService {
   getEnrolledExams() {
     return this.http.get<Exam[]>(this.baseUrl + 'exams/' + 'enrolled');
   }
+  getFinishedExams() {
+    return this.http.get<Exam[]>(this.baseUrl + 'exams/finished');
+  }
   deleteExam(examId: number) {
     return this.http.delete(this.baseUrl + 'exams/' + examId);
   }
@@ -65,5 +68,20 @@ export class ExamService {
 
   createUserAnswers(answers, examId) {
     return this.http.post(this.baseUrl + 'exams/' + examId + '/take', answers);
+  }
+
+  getStatsForUser(examId: number) {
+    return this.http.get<{ numberOfWrongAnswers; numberOfCorrectAnswers }>(
+      this.baseUrl + 'exams/stats/' + examId
+    );
+  }
+
+  getCreatedExams() {
+    return this.http.get<Exam[]>(this.baseUrl + 'exams/created');
+  }
+  getStatsForTeacher(examId: number) {
+    return this.http.get<{ userName; numberOfWrongAnswers; numberOfCorrectAnswers }[]>(
+      this.baseUrl + 'exams/stats/teacher/' + examId
+    );
   }
 }

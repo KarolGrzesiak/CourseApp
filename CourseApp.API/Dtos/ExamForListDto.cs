@@ -10,5 +10,6 @@ namespace CourseApp.API.Dtos
         public string AuthorKnownAs { get; set; }
         public DateTime DatePublished { get; set; }
         public TimeSpan? Duration { get; set; }
+        
     }
 }

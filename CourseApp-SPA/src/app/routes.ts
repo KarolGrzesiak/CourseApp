@@ -66,7 +66,8 @@ export const appRoutes: Routes = [
       {
         path: 'exams/:examId/take',
         component: ExamsTakeComponent,
-        resolve: { questionsWithAnswers: ExamTakeResolver }
+        resolve: { questionsWithAnswers: ExamTakeResolver },
+        canDeactivate: [PreventUnsavedChanges]
       },
 
       { path: 'messages', component: MessagesComponent, resolve: { messages: MessagesResolver } },

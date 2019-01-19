@@ -17,11 +17,20 @@ namespace CourseApp.API.Data
         }
         public async Task<IEnumerable<Exam>> GetEnrolledExamsForUserAsync(int userId)
         {
-            return await _context.UserExams.Include(ur => ur.Exam).Where(ur => ur.UserId == userId).Select(ur => ur.Exam).Include(e => e.Author).ToListAsync();
+            return await _context.UserExams.Include(ur => ur.Exam).Where(ur => ur.UserId == userId && ur.Finished == false).Select(ur => ur.Exam).Include(e => e.Author).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Exam>> GetFinishedExamsForUserAsync(int userId)
+        {
+            return await _context.UserExams.Include(ur => ur.Exam).Where(ur => ur.UserId == userId && ur.Finished == true).Select(ur => ur.Exam).Include(e => e.Author).ToListAsync();
         }
         public async Task<UserExam> GetUserWithExamAsync(int userId, int examId)
         {
-            return await _context.UserExams.FirstOrDefaultAsync(ur => ur.UserId == userId && ur.ExamId == examId);
+            return await _context.UserExams.Include(ur => ur.Exam).FirstOrDefaultAsync(ur => ur.UserId == userId && ur.ExamId == examId);
+        }
+        public async Task<IEnumerable<User>> GetUsersFromExamAsync(int examId)
+        {
+            return await _context.UserExams.Include(ur => ur.User).Where(ur => ur.ExamId == examId).Select(ur => ur.User).ToListAsync();
         }
 
     }

@@ -55,6 +55,24 @@ namespace CourseApp.API.Controllers
             return Ok(examsForReturn);
 
         }
+        [Authorize(Policy = "RequireTeacherRole")]
+        [HttpGet("created", Name = "GetCreatedExamsForUserAsync")]
+        public async Task<IActionResult> GetCreatedExamsForUserAsync()
+        {
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var examsFromRepo = await _repo.ExamRepository.GetCreatedExamsForUserAsync(userId);
+            var examsForReturn = _mapper.Map<IEnumerable<ExamForListDto>>(examsFromRepo);
+            return Ok(examsForReturn);
+        }
+
+        [HttpGet("finished", Name = "GetFinishedExamsForUserAsync")]
+        public async Task<IActionResult> GetFinishedExamsForUserAsync()
+        {
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var examsFromRepo = await _repo.UserExamRepository.GetFinishedExamsForUserAsync(userId);
+            var examsForReturn = _mapper.Map<IEnumerable<ExamForListDto>>(examsFromRepo);
+            return Ok(examsForReturn);
+        }
 
         [Authorize(Policy = "RequireTeacherRole")]
         [HttpPost]
@@ -134,6 +152,12 @@ namespace CourseApp.API.Controllers
             {
                 return Unauthorized();
             }
+            if (userExam.Exam.AuthorId == userId)
+            {
+                return BadRequest("Solving your own test is forbidden");
+            }
+            userExam.Finished = true;
+            _repo.UserExamRepository.Update(userExam);
             var userAnswers = _mapper.Map<IEnumerable<UserAnswer>>(userAnswersForCreation);
             foreach (var userAnswer in userAnswers)
             {

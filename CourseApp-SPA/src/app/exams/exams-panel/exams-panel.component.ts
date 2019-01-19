@@ -7,6 +7,8 @@ import { ExamsDeleteModalComponent } from '../exams-delete-modal/exams-delete-mo
 import { Exam } from 'src/app/_models/exam';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ExamService } from 'src/app/_services/exam.service';
+import { ExamsFinishedComponent } from '../exams-finished/exams-finished.component';
+import { ExamsOwnedComponent } from '../exams-owned/exams-owned.component';
 
 @Component({
   selector: 'app-exams-panel',
@@ -16,6 +18,8 @@ import { ExamService } from 'src/app/_services/exam.service';
 export class ExamsPanelComponent implements OnInit {
   @ViewChild(ExamsEnrolledComponent) enrolledExams: ExamsEnrolledComponent;
   @ViewChild(ExamsListComponent) examsList: ExamsListComponent;
+  @ViewChild(ExamsFinishedComponent) examsFinished: ExamsFinishedComponent;
+  @ViewChild(ExamsOwnedComponent) examsCreated: ExamsOwnedComponent;
   bsModalRef: BsModalRef;
 
   constructor(
@@ -27,8 +31,14 @@ export class ExamsPanelComponent implements OnInit {
 
   ngOnInit() {}
 
-  enrollOnExam() {
+  showEnrolledExams() {
     this.enrolledExams.loadEnrolledExams();
+  }
+  showFinishedExams() {
+    this.examsFinished.loadFinishedExams();
+  }
+  showCreatedExams() {
+    this.examsCreated.loadCreatedExams();
   }
 
   deleteExamsModal() {
@@ -42,13 +52,17 @@ export class ExamsPanelComponent implements OnInit {
           () => {
             const indexInEnrolled = this.enrolledExams.exams.findIndex(e => e.id === element.id);
             if (indexInEnrolled === -1) {
-              this.examsList.exams.splice(this.examsList.exams.findIndex(e => e.id === element.id), 1);
-            } else {
-              this.enrolledExams.exams.splice(
-                indexInEnrolled,
+              this.examsList.exams.splice(
+                this.examsList.exams.findIndex(e => e.id === element.id),
                 1
               );
+            } else {
+              this.enrolledExams.exams.splice(indexInEnrolled, 1);
             }
+            this.examsCreated.exams.splice(
+              this.examsCreated.exams.findIndex(e => e.id === element.id),
+              1
+            );
           },
           error => {
             this.alertify.error(error);

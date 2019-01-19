@@ -1,0 +1,10 @@
+<div *ngIf="exams?.length > 0">
+  <accordion>
+    <accordion-group *ngFor="let exam of exams; let i = index" heading="{{exam.name}}" (isOpenChange)="showStats($event,exam.id,i)">
+      <p>Number Of wrong answers: {{stats[i].numberOfWrongAnswers}}</p>
+      <p>Number Of correct answers: {{stats[i].numberOfCorrectAnswers}}</p>
+      Your score: {{(stats[i].numberOfCorrectAnswers*100)/(stats[i].numberOfCorrectAnswers+stats[i].numberOfWrongAnswers)}}%
+    </accordion-group>
+  </accordion>
+</div>
+<div *ngIf="exams?.length == 0">No finished tests</div>

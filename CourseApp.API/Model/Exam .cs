@@ -14,6 +14,7 @@ namespace CourseApp.API.Model
         public string Description { get; set; }
         public ICollection<Question> Questions { get; set; }
         public TimeSpan? Duration { get; set; }
+        public bool? Finished { get; set; }
         [Required]
         public byte[] PasswordHash { get; set; }
         [Required]
