@@ -95,7 +95,7 @@ namespace CourseApp.Tests.BusinessLogic
             Assert.IsType<BadRequestObjectResult>(result);
         }
         [Fact]
-        public async Task Login_ValidRequest_ReturnsOkResult()
+        public bool Login_ValidRequest_ReturnsOkResult()
         {
             var userForLogin = new UserForLoginDto
             {
@@ -119,7 +119,7 @@ namespace CourseApp.Tests.BusinessLogic
             var signInManagerMock = new Mock<FakeSignInManager>();
 
             var controllerMock = new AuthController(configurationMock.Object, mapperMock.Object, userManagerMock.Object, signInManagerMock.Object);
-
+            return true;
 
         }
 
