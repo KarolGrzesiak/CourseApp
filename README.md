@@ -1,10 +1,8 @@
-IN DEVELOPMENT
-
-DESCRIPTION SOON
 
 # CourseApp
-Platform for online tests
-Using Angular 6, ASP.NET Core. SPA with REST API 
+Social-media type web application which allows for easy and fast way to make or take an exam.   
+Builded using Angular 6 and ASP.NET Core.  
+SPA with REST API.  
 
-
-Documentation ready - check the folders
+[Quick presentation of some core functionalities](https://youtu.be/gCflN5x4etM)  
+[Simple documentation](https://github.com/KarolGrzesiak/CourseApp/blob/master/Documentation.pdf)
