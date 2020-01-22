@@ -1,5 +1,6 @@
 
 # CourseApp
+
 Social-media type web application which allows for easy and fast way to make or take an exam.   
 Built using Angular 6 and ASP.NET Core.  
 SPA with REST API.  
